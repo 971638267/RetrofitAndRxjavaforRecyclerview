@@ -1,0 +1,82 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/theme_bg</item>
+        <item name="colorPrimaryDark">@color/theme_bg</item>
+        <item name="colorAccent">@color/theme_bg</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <!--<item name="android:actionBarSize">@dimen/dp40</item>-->
+        <item name="android:windowBackground">@color/theme_blank_bg</item>
+        <item name="android:textColorPrimary">@color/theme_text_black</item>
+        <item name="contentInsetStart">@dimen/dp13</item>
+        <item name="contentInsetEnd">@dimen/dp13</item>
+        <item name="android:windowAnimationStyle">@style/ActivityInOutAnimation</item>
+        <!-- 底部导航栏颜色 -->
+        <item name="android:navigationBarColor">@color/theme_bg</item>
+    </style>
+
+    <style name="Transparent" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@color/bg_f3f</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowAnimationStyle">@style/ActivityInOutAnimation</item>
+    </style>
+    <!-- Base application theme. -->
+    <style name="AppTheme_StartPager" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/clear</item>
+        <item name="colorPrimaryDark">@color/clear</item>
+        <item name="colorAccent">@color/clear</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowBackground">@color/gray_3a</item>
+        <item name="android:textColorPrimary">@color/white</item>
+    </style>
+    <!-- 不隐藏状态栏-->
+    <style name="AppTheme_clear_notfull" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/clear</item>
+        <item name="colorPrimaryDark">@color/clear</item>
+        <item name="colorAccent">@color/clear</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowBackground">@color/bg_f3f</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:windowAnimationStyle">@style/ActivityInOutAnimation</item>
+    </style>
+    <!-- Actvity 切换动画 -->
+    <style name="ActivityInOutAnimation" parent="@android:style/Animation.Activity">
+        <item name="android:animationDuration">160</item>
+        <item name="android:activityOpenEnterAnimation">@anim/push_right_in</item>
+        <item name="android:activityOpenExitAnimation">@anim/push_left_out</item>
+        <item name="android:activityCloseEnterAnimation">@anim/push_left_in</item>
+        <item name="android:activityCloseExitAnimation">@anim/push_right_out</item>
+        <item name="android:taskOpenEnterAnimation">@anim/push_right_in</item>
+        <item name="android:taskOpenExitAnimation">@anim/push_left_out</item>
+        <item name="android:taskCloseEnterAnimation">@anim/push_left_in</item>
+        <item name="android:taskCloseExitAnimation">@anim/push_left_out</item>
+        <item name="android:taskToFrontEnterAnimation">@anim/push_right_in</item>
+        <item name="android:taskToFrontExitAnimation">@anim/push_left_out</item>
+        <item name="android:taskToBackEnterAnimation">@anim/push_right_in</item>
+        <item name="android:taskToBackExitAnimation">@anim/push_left_out</item>
+        <item name="android:wallpaperOpenEnterAnimation">@anim/push_right_in</item>
+        <item name="android:wallpaperOpenExitAnimation">@anim/push_left_out</item>
+        <item name="android:wallpaperCloseEnterAnimation">@anim/push_right_in</item>
+        <item name="android:wallpaperCloseExitAnimation">@anim/push_right_out</item>
+        <item name="android:wallpaperIntraOpenEnterAnimation">@anim/push_right_in</item>
+        <item name="android:wallpaperIntraOpenExitAnimation">@anim/push_left_out</item>
+        <item name="android:wallpaperIntraCloseEnterAnimation">@anim/push_left_in</item>
+        <item name="android:wallpaperIntraCloseExitAnimation">@anim/push_right_out</item>
+        <item name="android:fragmentOpenEnterAnimation">@anim/push_right_in</item>
+        <item name="android:fragmentOpenExitAnimation">@anim/push_left_out</item>
+        <item name="android:fragmentEnterTransition">@anim/push_right_in</item>
+        <item name="android:fragmentExitTransition">@anim/push_left_out</item>
+        <item name="android:fragmentCloseEnterAnimation">@anim/push_left_in</item>
+        <item name="android:fragmentCloseExitAnimation">@anim/push_right_out</item>
+        <item name="android:fragmentAllowEnterTransitionOverlap">@anim/push_right_out</item>
+        <item name="android:fragmentAllowReturnTransitionOverlap">@anim/push_right_out</item>
+    </style>
+
+</resources>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbarSize"
+        android:background="?attr/colorPrimary"
+        android:paddingRight="@dimen/dp13"
+        android:paddingLeft="@dimen/dp13"
+        >
+        <TextView
+            style="@style/first_title_white"
+            android:text="@string/message_pager_title"
+            android:layout_centerInParent="true"/>
+    </RelativeLayout>
+    <com.gan.myrecycleview.MyRecycleView
+        android:id="@+id/message_page_recycleview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+    </com.gan.myrecycleview.MyRecycleView>
+
+</LinearLayout>

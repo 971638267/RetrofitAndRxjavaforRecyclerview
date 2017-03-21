@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbarSize"
+        android:background="?attr/colorPrimary"
+        android:paddingLeft="@dimen/dp13"
+        android:paddingRight="@dimen/dp13">
+
+        <TextView
+            style="@style/first_title_white"
+            android:layout_centerInParent="true"
+            android:text="@string/me_pager_title" />
+
+        <TextView
+            style="@style/third_title_white"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="@string/exit_app" />
+    </RelativeLayout>
+
+    <com.yunpai.tms.view.PullToRefreshLayout
+        android:id="@+id/refresh_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include layout="@layout/refresh_head" />
+        <!-- 支持所有实现Pullable接口的View -->
+        <com.yunpai.tms.view.PullableScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/theme_bg"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:paddingTop="@dimen/dp5"
+                    android:paddingBottom="@dimen/dp15">
+
+                    <TextView
+                        style="@style/first_title_white"
+                        android:text="名称" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp10"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/third_title_white"
+                            android:text="状态:正常" />
+
+                        <TextView
+                            style="@style/third_title_white"
+                            android:layout_marginLeft="@dimen/dp10"
+                            android:text="开通日期:2016-07-30" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp20"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="￥78210"
+                                android:textColor="@color/theme_text_white"
+                                android:textSize="@dimen/sp22" />
+
+                            <TextView
+                                style="@style/third_title_white"
+                                android:text="账户余额"
+                                android:layout_marginTop="@dimen/dp5"
+                                android:textColor="@color/theme_text_white" />
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="@dimen/dp1"
+                            android:layout_height="match_parent"
+                            android:background="@color/theme_white_bg"></View>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="￥0"
+                                android:textColor="@color/theme_text_white"
+                                android:textSize="@dimen/sp22" />
+
+                            <TextView
+                                style="@style/third_title_white"
+                                android:text="可提金额"
+                                android:layout_marginTop="@dimen/dp5"
+                                android:textColor="@color/theme_text_white" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <com.yunpai.tms.view.MyGridView
+                    android:id="@+id/me_page_gd"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:verticalSpacing="1dp"
+                    android:horizontalSpacing="1dp"
+                    android:numColumns="2">
+
+                </com.yunpai.tms.view.MyGridView>
+            </LinearLayout>
+
+        </com.yunpai.tms.view.PullableScrollView>
+    </com.yunpai.tms.view.PullToRefreshLayout>
+
+</LinearLayout>

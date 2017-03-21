@@ -1,0 +1,161 @@
+<resources>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/theme_bg</item>
+        <item name="colorPrimaryDark">@color/theme_bg</item>
+        <item name="colorAccent">@color/theme_bg</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <!--<item name="android:actionBarSize">@dimen/dp40</item>-->
+        <item name="android:windowBackground">@color/theme_blank_bg</item>
+        <item name="android:textColorPrimary">@color/theme_text_black</item>
+        <item name="contentInsetStart">@dimen/dp13</item>
+        <item name="contentInsetEnd">@dimen/dp13</item>
+        <item name="android:windowAnimationStyle">@style/ActivityInOutAnimation</item>
+    </style>
+
+    <style name="Transparent" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@color/bg_f3f</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowAnimationStyle">@style/ActivityInOutAnimation</item>
+    </style>
+    <!-- Base application theme. -->
+    <style name="AppTheme_StartPager" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/clear</item>
+        <item name="colorPrimaryDark">@color/clear</item>
+        <item name="colorAccent">@color/clear</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowBackground">@color/bg_f3f</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:windowAnimationStyle">@style/ActivityInOutAnimation</item>
+    </style>
+    <!-- 不隐藏状态栏-->
+    <style name="AppTheme_clear_notfull" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/clear</item>
+        <item name="colorPrimaryDark">@color/clear</item>
+        <item name="colorAccent">@color/clear</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowBackground">@color/bg_f3f</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:windowAnimationStyle">@style/ActivityInOutAnimation</item>
+    </style>
+    <!-- Actvity 切换动画 -->
+    <style name="ActivityInOutAnimation" parent="@android:style/Animation.Activity">
+        <item name="android:animationDuration">160</item>
+        <item name="android:activityOpenEnterAnimation">@anim/push_right_in</item>
+        <item name="android:activityOpenExitAnimation">@anim/push_left_out</item>
+        <item name="android:activityCloseEnterAnimation">@anim/push_left_in</item>
+        <item name="android:activityCloseExitAnimation">@anim/push_right_out</item>
+        <item name="android:taskOpenEnterAnimation">@anim/push_right_in</item>
+        <item name="android:taskOpenExitAnimation">@anim/push_left_out</item>
+        <item name="android:taskCloseEnterAnimation">@anim/push_left_in</item>
+        <item name="android:taskCloseExitAnimation">@anim/push_left_out</item>
+        <item name="android:taskToFrontEnterAnimation">@anim/push_right_in</item>
+        <item name="android:taskToFrontExitAnimation">@anim/push_left_out</item>
+        <item name="android:taskToBackEnterAnimation">@anim/push_right_in</item>
+        <item name="android:taskToBackExitAnimation">@anim/push_left_out</item>
+        <item name="android:wallpaperOpenEnterAnimation">@anim/push_right_in</item>
+        <item name="android:wallpaperOpenExitAnimation">@anim/push_left_out</item>
+        <item name="android:wallpaperCloseEnterAnimation">@anim/push_right_in</item>
+        <item name="android:wallpaperCloseExitAnimation">@anim/push_right_out</item>
+        <item name="android:wallpaperIntraOpenEnterAnimation">@anim/push_right_in</item>
+        <item name="android:wallpaperIntraOpenExitAnimation">@anim/push_left_out</item>
+        <item name="android:wallpaperIntraCloseEnterAnimation">@anim/push_left_in</item>
+        <item name="android:wallpaperIntraCloseExitAnimation">@anim/push_right_out</item>
+    </style>
+    <!-- 一级标题 白色-->
+    <style name="first_title_white">
+        <item name="android:textColor">@color/theme_text_white</item>
+        <item name="android:textSize">@dimen/sp18</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <!-- 二级标题 白色-->
+    <style name="second_title_white">
+        <item name="android:textColor">@color/theme_text_white</item>
+        <item name="android:textSize">@dimen/sp16</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <!-- 二级标题 黑色-->
+    <style name="second_title_black">
+        <item name="android:textColor">@color/theme_text_black</item>
+        <item name="android:textSize">@dimen/sp16</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <style name="second_title_gray">
+        <item name="android:textColor">@color/theme_text_gray</item>
+        <item name="android:textSize">@dimen/sp16</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <!-- 三级标题 白色-->
+    <style name="third_title_white">
+        <item name="android:textColor">@color/theme_text_white</item>
+        <item name="android:textSize">@dimen/sp14</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <!-- 三级标题 黑色-->
+    <style name="third_title_black">
+        <item name="android:textColor">@color/theme_text_black</item>
+        <item name="android:textSize">@dimen/sp14</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <!-- 三级标题 灰色-->
+    <style name="third_title_gray">
+        <item name="android:textColor">@color/theme_text_gray</item>
+        <item name="android:textSize">@dimen/sp14</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <!-- 四级标题 灰色-->
+    <style name="fourth_title_gray">
+        <item name="android:textColor">@color/theme_text_gray</item>
+        <item name="android:textSize">@dimen/sp12</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <!-- 四级标题 白色-->
+    <style name="fourth_title_white">
+        <item name="android:textColor">@color/theme_text_white</item>
+        <item name="android:textSize">@dimen/sp12</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="ToolbarTitle" parent="@style/first_title_white">
+        <item name="android:padding">0dp</item>
+        <item name="android:layout_margin">0dp</item>
+    </style>
+
+    <!-- dilog样式 -->
+    <style name="customDialog" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <!-- 背景透明 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    <!-- 轮播器点的背景 -->
+    <style name="dot_style">
+        <item name="android:layout_width">5dp</item>
+        <item name="android:layout_height">5dp</item>
+        <item name="android:layout_marginLeft">2dp</item>
+        <item name="android:layout_marginRight">2dp</item>
+    </style>
+</resources>

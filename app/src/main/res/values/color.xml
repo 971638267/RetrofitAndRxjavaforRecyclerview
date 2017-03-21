@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--主题调色-->
+    <color name="theme_blank_bg">#f0f0f0</color><!--空白底色-->
+    <color name="theme_white_bg">#fcfcfc</color><!--主题白色-->
+    <color name="theme_border_bg">#ebebeb</color><!--边框色-->
+    <color name="theme_bg">#2186f3</color><!--主题色--><!--软件主要色调-->
+    <color name="mid_theme_bg">#662186f3</color><!--透明主题色--><!--软件主要色调-->
+    <color name="theme_red">#ffff4949</color><!--主题红色-->
+    <color name="theme_text_black">#3a3a3a</color><!--主题字体黑色-->
+    <color name="theme_text_gray">#929292</color><!--主题字体灰色-->
+    <color name="theme_text_white">#f4f4f4</color><!--主题字体白色-->
+    <!--基本颜色-->
+    <color name="clear">#00000000</color>
+    <color name="gray_90c2">#90c2c2c2</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="black_53">#535353</color>
+    <color name="black_5c">#5c6c73</color>
+    <color name="black_990">#99000000</color>
+    <color name="gray">#9a9a9a</color>
+    <color name="bg_bg">#80000000</color>
+
+    <!--常用color-->
+    <!--文字，按钮-->
+    <color name="orange_ff6">#ff6600</color>
+    <color name="orange_f92">#ff9425</color>
+    <color name="orange_60f92">#60ff9425</color>
+    <color name="blue_0ae">#00a0e9</color>
+    <color name="blue_417">#4176ed</color>
+    <color name="blue_80417">#804176ed</color>
+    <color name="blue_5a9">#5a92d6</color>
+    <color name="blue_219">#2196f3</color>
+    <color name="blue_218">#2186f3</color>
+    <color name="green_049">#049f4b</color>
+    <color name="green_0c0">#05cf06</color>
+    <color name="red_c32">#c32121</color>
+    <!--文字-->
+    <color name="gray_d6d">#d6d7dc</color>
+    <color name="gray_3a">#3a3a3a</color>
+    <color name="gray_a3">#a0a0a0</color>
+    <color name="gray_60">#606060</color>
+    <color name="gray_92">#929292</color>
+    <color name="gray_99">#999999</color>
+    <color name="gray_b3">#b3b3b3</color>
+    <color name="gray_d9">#d9d9d9</color>
+    <color name="gray_c7">#c7c7c7</color>
+    <!--按钮-->
+    <color name="gray_a0a">#a0a0a0</color>
+    <!--分割线、按钮-->
+    <color name="gray_cc">#cccccc</color>
+    <!--底色-->
+    <color name="gray_f0">#f0f0f0</color>
+    <color name="gray_eb">#ebebeb</color>
+    <!--最轻的底色-->
+    <color name="gray_fa">#fbfbfb</color>
+    <!--界面背景色-->
+    <color name="bg_f3f">#f3f5f7</color>
+    <color name="bg_black60">#60000000</color>
+    <!--登录界面颜色-->
+    <color name="blue_009">#00a0e9</color>
+</resources>

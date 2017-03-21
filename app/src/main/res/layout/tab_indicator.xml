@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp50"
+    android:layout_weight="1"
+   >
+
+    <ImageView
+        android:layout_marginTop="@dimen/dp5"
+        android:id="@+id/tab_indicator_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_centerHorizontal="true"
+        android:contentDescription="@null"
+         />
+
+    <TextView
+        android:id="@+id/tab_indicator_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="me"
+        android:textColor="@drawable/btn_buttom_tab_text_selector"
+        android:layout_marginBottom="3dp"
+        android:layout_centerHorizontal="true"
+        android:textSize="@dimen/sp12" />
+
+    <TextView
+        android:id="@+id/tab_indicator_unread"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:layout_marginLeft="-10dp"
+        android:background="@drawable/shape_btn_corner_10dp_bg_red"
+        android:paddingBottom="1dp"
+        android:paddingLeft="5dp"
+        android:gravity="center"
+        android:paddingRight="5dp"
+        android:paddingTop="1dp"
+        android:text="5"
+        android:layout_toRightOf="@id/tab_indicator_icon"
+        android:textColor="@color/theme_text_white"
+        android:textSize="@dimen/sp10" />
+
+    <View
+        android:id="@+id/tab_indicator_warn"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginLeft="-5dp"
+        android:layout_toRightOf="@id/tab_indicator_icon"
+        android:background="@drawable/shape_point_red" />
+
+</RelativeLayout>
