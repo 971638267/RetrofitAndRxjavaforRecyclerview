@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.yunpai.tms.application.MyApplication;
 import com.yunpai.tms.constant.Constant;
+import com.yunpai.tms.constant.UrlConstant;
 
 import java.io.File;
 import java.io.IOException;
@@ -37,12 +38,18 @@ public class OkHttp3Utils {
 
     private static OkHttpClient mOkHttpClient;
 
-    //设置缓存目录
-    // private static File cacheDirectory = new File(MyApplication.getInstance().getApplicationContext().getCacheDir().getAbsolutePath(), "MyCache");
-    private static File cacheDirectory = new File(Constant.BASE_PATH, "MyCache");
-
-    private static Cache cache = new Cache(cacheDirectory, 10 * 1024 * 1024);
-
+    //设置缓存目录和缓存空间大小
+    private static Cache provideCache() {
+        Cache cache = null;
+        try {
+            //cache = new Cache( new File(MyApplication.getInstance().getApplicationContext().getCacheDir(), "response" ),
+            cache = new Cache(new File(MyApplication.getInstance().getApplicationContext().getExternalCacheDir(), "response"),
+                    10 * 1024 * 1024); // 10 MB
+        } catch (Exception e) {
+            Log.e("cache", "Could not create Cache!");
+        }
+        return cache;
+    }
 
     /**
      * 获取OkHttpClient对象
@@ -55,28 +62,29 @@ public class OkHttp3Utils {
 
             //同样okhttp3后也使用build设计模式
             mOkHttpClient = new OkHttpClient.Builder()
+                    .cache(provideCache())
                     //设置一个自动管理cookies的管理器
-                    // .cookieJar(new CookiesManager())
-                    //没网络时的拦截器
-                    .addInterceptor(new MyIntercepter())
+                    //.cookieJar(new CookiesManager())
+                    //网络拦截器
+                    .addInterceptor(baseInterceptor)
+                    .addNetworkInterceptor(rewriteCacheControlInterceptor)
                     //设置请求读写的超时时间
                     .connectTimeout(30, TimeUnit.SECONDS)
                     .writeTimeout(30, TimeUnit.SECONDS)
                     .readTimeout(30, TimeUnit.SECONDS)
-                    .cache(cache)
                     .build();
         }
         return mOkHttpClient;
     }
 
-
     /**
-     * 拦截器
+     * 获取缓存
      */
-    private static class MyIntercepter implements Interceptor {
+    private static Interceptor baseInterceptor = new Interceptor() {
         @Override
         public Response intercept(Chain chain) throws IOException {
             Request oldRequest = chain.request();
+
             //gan-----start----------------以下代码为添加一些公共参数使用--------------------------
             // 添加新的参数
             String time = System.currentTimeMillis() / 1000 + "";
@@ -85,9 +93,9 @@ public class OkHttp3Utils {
                     .newBuilder()
                     .scheme(oldRequest.url().scheme())
                     .host(oldRequest.url().host());
-            //.addQueryParameter("regionAId", "")
-            //.addQueryParameter("regionZId", "");
-            //.addQueryParameter("os", "android")
+                    //.addQueryParameter("regionAId", "")
+                    //.addQueryParameter("regionZId", "")
+                    //.addQueryParameter("os", "android");
             //.addQueryParameter("time", URLEncoder.encode(time, "UTF-8"))
             //.addQueryParameter("version", "1.1.0")
             //.addQueryParameter("sign", MD5.md5("key=" + mKey));
@@ -97,26 +105,28 @@ public class OkHttp3Utils {
                     .url(authorizedUrlBuilder.build())
                     .build();
             //gan-----end
-            if (!isNetworkReachable(MyApplication.getInstance().getApplicationContext())) {
+            if (UrlConstant.CACHE) {//使用缓存
+                //缓存控制
+                CacheControl tempCacheControl = CacheControl.FORCE_NETWORK;//不走缓存
+                if (!isNetworkReachable(MyApplication.getInstance().getApplicationContext())) {
+                    /**
+                     * 离线缓存控制  总的缓存时间=在线缓存时间+设置离线缓存时间
+                     */
+                    int maxStale = 60 * 60 * 24 * 7; // 离线时缓存保存1周,单位:秒
+                    tempCacheControl = new CacheControl.Builder()
+                            .onlyIfCached()
+                            .maxStale(maxStale, TimeUnit.SECONDS)
+                            .build();
+
+                    LogUtils.D("gan-retrofit-okhttp3", "无网络===========>读取缓存");
+                }
+
                 newRequest = newRequest.newBuilder()
-                        .cacheControl(CacheControl.FORCE_CACHE)//无网络时只从缓存中读取
+                        .cacheControl(tempCacheControl)//使用缓存
                         .build();
             }
 
             Response response = chain.proceed(newRequest);
-            if (isNetworkReachable(MyApplication.getInstance().getApplicationContext())) {
-                int maxAge = 60 * 60; // 有网络时 设置缓存超时时间1个小时
-                response.newBuilder()
-                        .removeHeader("Pragma")
-                        .header("Cache-Control", "public, max-age=" + maxAge)
-                        .build();
-            } else {
-                int maxStale = 60 * 60 * 24 * 28; // 无网络时，设置超时为4周
-                response.newBuilder()
-                        .removeHeader("Pragma")
-                        .header("Cache-Control", "public, only-if-cached, max-stale=" + maxStale)
-                        .build();
-            }
             //***************打印Log*****************************
             if (Constant.DEBUG) {
                 String requestUrl = newRequest.url().toString(); // 获取请求url地址
@@ -130,13 +140,36 @@ public class OkHttp3Utils {
                 if (Constant.NET_DATA_SHOW) {
                     //打印返回数据
                     LogUtils.D("gan-retrofit-okhttp3", "responseBody=====>" + response.body().string());
-                    Constant.NET_DATA_SHOW=false;
+                    Constant.NET_DATA_SHOW = false;
                 }
 
             }
             return response;
         }
-    }
+    };
+
+    private static Interceptor rewriteCacheControlInterceptor = new Interceptor() {
+        @Override
+        public Response intercept(Chain chain) throws IOException {
+            Request request = chain.request();
+            Response response = chain.proceed(request);
+            if (isNetworkReachable(MyApplication.getInstance().getApplicationContext())) {
+                int maxAge = 0; // 有网络时 设置缓存超时时间0秒
+                response = response.newBuilder()
+                        .removeHeader("Pragma")// 清除头信息，因为服务器如果不支持，会返回一些干扰信息，不清除下面无法生效
+                        .removeHeader("Cache-Control")
+                        .header("Cache-Control", "public, max-age=" + maxAge)
+                        .build();
+            } else {
+                int maxStale = 60 * 60 * 24 * 7; // 无网络时，设置超时为1周
+                response = response.newBuilder()
+                        .removeHeader("Pragma")
+                        .header("Cache-Control", "public, only-if-cached, max-stale=" + maxStale)
+                        .build();
+            }
+            return response;
+        }
+    };
 
     private static String bodyToString(final RequestBody request) {
         try {
@@ -199,3 +232,4 @@ public class OkHttp3Utils {
     }
 
 }
+
