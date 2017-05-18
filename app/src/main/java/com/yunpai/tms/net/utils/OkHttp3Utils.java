@@ -283,14 +283,17 @@ public class OkHttp3Utils {
         builder.add("userId", userId+"");
         //添加原请求体
         paramsBuilder.append("tokenId="+tokenId).append("&").append("userId="+userId);
-        for (int i = 0; i < body.size(); i++) {
-            builder.addEncoded(body.encodedName(i), body.encodedValue(i));
-            paramsBuilder.append("&");
-            paramsBuilder.append(body.name(i));
-            paramsBuilder.append("=");
-            paramsBuilder.append(body.value(i));
+        if (body != null) {
+            for (int i = 0; i < body.size(); i++) {
+                builder.addEncoded(body.encodedName(i), body.encodedValue(i));
+                paramsBuilder.append("&");
+                paramsBuilder.append(body.name(i));
+                paramsBuilder.append("=");
+                paramsBuilder.append(body.value(i));
+            }
         }
         return builder.build();
     }
+
 
 }
