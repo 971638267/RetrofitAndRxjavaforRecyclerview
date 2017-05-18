@@ -1,6 +1,6 @@
 package com.yunpai.tms.pagers;
 
-import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
@@ -12,7 +12,7 @@ import android.view.View;
 * @date 2017年02月21日
 *
  */
-public abstract class ContentBasePager  {
+public abstract class ContentBasePager<T> {
 
 	public AppCompatActivity mActivity;// Mainactivity的引用
 	public View mRootView;// 布局对象
@@ -43,6 +43,17 @@ public abstract class ContentBasePager  {
 	 * 页面销毁
 	 */
 	public void onDestroy() {
+
+	}
+
+	/**
+	 * 刷新数据
+	 */
+	public void refreshData(T t) {
+
+	}
+
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
 	}
 }

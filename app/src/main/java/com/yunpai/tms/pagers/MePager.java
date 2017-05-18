@@ -14,6 +14,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.yunpai.tms.R;
+import com.yunpai.tms.activity.LoginActivity;
+import com.yunpai.tms.util.PrefUtils;
 import com.yunpai.tms.view.MyGridView;
 import com.yunpai.tms.view.PullToRefreshLayout;
 
@@ -22,6 +24,7 @@ import java.util.HashMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  *
@@ -175,5 +178,15 @@ public class MePager extends ContentBasePager implements PullToRefreshLayout.OnR
 			tv.setText(lstDate.get(position).get("text").toString());
 			return convertView;
 		}
+	}
+
+	@OnClick(R.id.me_exit)
+	public void exit() {
+		PrefUtils.setBoolean("isLogin", false);
+		PrefUtils.SetString("tokenId", "");
+		PrefUtils.SetInt("userId", 0);
+		PrefUtils.SetInt("companyId", 0);
+		mActivity.startActivity(new Intent(mActivity, LoginActivity.class));
+		mActivity.finish();
 	}
 }

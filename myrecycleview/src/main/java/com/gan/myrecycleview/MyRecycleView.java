@@ -1,14 +1,9 @@
 package com.gan.myrecycleview;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.AttributeSet;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -18,7 +13,6 @@ import android.widget.TextView;
 
 import com.gan.myrecycleview.wrapper.LoadMoreWrapper;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -318,7 +312,7 @@ public class MyRecycleView<T> extends LinearLayout {
     public void setDateRefresh(List<T> actAllList, List<T> tmp,int drawableId,String msg) {
         actAllList.clear();
         stopRefresh();//如果刷新则停止刷新
-        if (tmp.isEmpty()) {
+        if (tmp==null || tmp.isEmpty()) {
             customExceptView(drawableId, msg);
             setHasMore(false);
         } else {
@@ -336,7 +330,7 @@ public class MyRecycleView<T> extends LinearLayout {
      * @param tmpLoadmore
      */
     public void setDateLoadMore(List<T> actAllList, List<T> tmpLoadmore) {
-        if (tmpLoadmore.isEmpty()) {
+        if (tmpLoadmore==null|| tmpLoadmore.isEmpty()) {
             setHasMore(false);//如果没有更多数据则设置不可加载更多
             setLoadMoreCompleted();//加载完毕
             stopRefresh();//如果刷新则停止刷新

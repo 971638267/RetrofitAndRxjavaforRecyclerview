@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingBottom="10dp" >
+
+    <View
+        android:id="@+id/other_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+
+        <Button
+            android:id="@+id/choose_by_camera"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_white_top_round_selector"
+            android:padding="5dp"
+            android:text="@string/make_pic"
+            android:textStyle="bold"
+            android:textColor="@color/theme_bg"
+            android:textSize="18sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#dddcdc" />
+
+        <Button
+            android:id="@+id/choose_by_local"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/bg_white_bottom_round_selector"
+            android:padding="5dp"
+            android:text="@string/from_book"
+            android:textStyle="bold"
+            android:textColor="@color/theme_bg"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/dialog_cancel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_white_selector"
+            android:padding="5dp"
+            android:text="@string/cancel"
+            android:textColor="@color/theme_bg"
+            android:textStyle="bold"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+</LinearLayout>

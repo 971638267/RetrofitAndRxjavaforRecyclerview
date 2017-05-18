@@ -1,16 +1,21 @@
 package com.yunpai.tms.net.subscribers;
 
 import android.content.Context;
-import android.widget.Toast;
+import android.content.Intent;
 
 
+import com.yunpai.tms.activity.LoginActivity;
+import com.yunpai.tms.application.AppStackManager;
+import com.yunpai.tms.application.MyApplication;
 import com.yunpai.tms.net.apiexception.ApiException;
 import com.yunpai.tms.net.progress.ProgressCancelListener;
 import com.yunpai.tms.net.progress.ProgressDialogHandler;
+import com.yunpai.tms.util.PrefUtils;
 import com.yunpai.tms.util.ToastUtil;
 
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
+import java.net.UnknownHostException;
 
 import retrofit2.adapter.rxjava.HttpException;
 import rx.Subscriber;
@@ -19,6 +24,7 @@ import rx.Subscriber;
  * 用于在Http请求开始时，自动显示一个ProgressDialog
  * 在Http请求结束是，关闭ProgressDialog
  * 调用者自己对请求数据进行处理
+ * Created by liukun on 16/3/10.
  */
 public class ProgressSubscriber<T> extends Subscriber<T> implements ProgressCancelListener {
 
@@ -80,23 +86,54 @@ public class ProgressSubscriber<T> extends Subscriber<T> implements ProgressCanc
     @Override
     public void onError(Throwable e) {
         if (e instanceof SocketTimeoutException) {
-            ToastUtil.ToastCenter("网络中断，请检查您的网络状态");
+            ToastUtil.ToastCenter("请求超时，请检查您的网络状态");
         } else if (e instanceof ConnectException) {
-            ToastUtil.ToastCenter("网络中断，请检查您的网络状态");
-        }else if (e instanceof HttpException){             //HTTP错误
+            ToastUtil.ToastCenter("无法连接服务器，请检查您的网络状态");
+        }else if (e instanceof HttpException){
+            //HTTP错误
+            int code= ((HttpException) e).code();
+            doNetErr(code);
+            e.printStackTrace();
+        }else if (e instanceof UnknownHostException){  //无网络
             ToastUtil.ToastCenter("网络异常，请检查您的网络状态");
             e.printStackTrace();
         } else if (e instanceof ApiException){
-            ToastUtil.ToastCenter(e.getMessage());
+
+            if ("NOT_LOGIN".equals(e.getMessage())){
+                PrefUtils.setBoolean("isLogin",false);
+                PrefUtils.SetString("tokenId","");
+                PrefUtils.SetString("userId","");
+                Intent it= new Intent(MyApplication.getInstance(), LoginActivity.class);
+                it.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                MyApplication.getInstance().startActivity(it);
+                AppStackManager.getInstance().LoginActivity();
+            }else{
+                ToastUtil.ToastCenter(e.getMessage());
+            }
             e.printStackTrace();
         }else {
-            //这里可以收集未知错误上传到服务器
             ToastUtil.ToastCenter("服务器忙");
             e.printStackTrace();
         }
         dismissProgressDialog();
     }
 
+
+    /**
+     * 分析网络异常
+     * @param code
+     */
+    private void doNetErr(int code) {
+        switch (code){
+            case 404:
+                ToastUtil.ToastCenter("请求接口异常");
+                break;
+            default:
+                ToastUtil.ToastCenter("网络异常，请检查您的网络状态");
+                break;
+        }
+
+    }
     /**
      * 将onNext方法中的返回结果交给Activity或Fragment自己处理
      *

@@ -79,4 +79,12 @@
         <item name="android:fragmentAllowReturnTransitionOverlap">@anim/push_right_out</item>
     </style>
 
+<!--进度条样式-->
+    <style name="ProgressBar_Mini" parent="Base.Widget.AppCompat.ProgressBar.Horizontal">
+        <item name="android:maxHeight">@dimen/dp2</item>
+        <item name="android:minHeight">@dimen/dp2</item>
+        <item name="android:indeterminateOnly">false</item>
+        <item name="android:indeterminateDrawable">@android:drawable/progress_indeterminate_horizontal</item>
+        <item name="android:progressDrawable">@drawable/progressbar_mini</item>
+    </style>
 </resources>

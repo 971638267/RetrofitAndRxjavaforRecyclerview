@@ -75,7 +75,14 @@
         <item name="android:textSize">@dimen/sp18</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
+    </style> <!-- 一级标题 黑色-->
+    <style name="first_title_black">
+        <item name="android:textColor">@color/theme_text_black</item>
+        <item name="android:textSize">@dimen/sp18</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
     </style>
+
     <!-- 二级标题 白色-->
     <style name="second_title_white">
         <item name="android:textColor">@color/theme_text_white</item>
@@ -90,6 +97,7 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
+    <!-- 二级标题 灰色-->
     <style name="second_title_gray">
         <item name="android:textColor">@color/theme_text_gray</item>
         <item name="android:textSize">@dimen/sp16</item>
@@ -132,23 +140,72 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
+
+
+    <!-- 四级标题 黑色-->
+    <style name="fourth_title_black">
+        <item name="android:textColor">@color/theme_text_black</item>
+        <item name="android:textSize">@dimen/sp12</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+
+    <!-- 五级标题 灰色-->
+    <style name="five_title_gray">
+        <item name="android:textColor">@color/theme_text_gray</item>
+        <item name="android:textSize">@dimen/sp10</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="ToolbarTitle" parent="@style/first_title_white">
+    <style name="ToolbarTitle" parent="@style/second_title_white">
         <item name="android:padding">0dp</item>
         <item name="android:layout_margin">0dp</item>
     </style>
 
     <!-- dilog样式 -->
     <style name="customDialog" parent="Theme.AppCompat.Light.Dialog">
+
         <item name="android:windowFrame">@null</item>
+        <!-- 边框 -->
+        <item name="android:windowIsFloating">false</item>
+        <!-- 是否浮现在activity之上 -->
+        <item name="android:windowIsTranslucent">true</item>
+        <!-- 半透明 -->
         <item name="android:windowNoTitle">true</item>
-        <!-- 背景透明 -->
+        <!-- 无标题 -->
         <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:windowIsFloating">true</item>
-        <item name="android:windowContentOverlay">@null</item>
+        <!-- 背景透明 -->
+        <item name="android:backgroundDimEnabled">true</item>
+        <!-- 模糊 -->
+
+    </style>
+
+    <!-- 动画样式 -->
+    <style name="AnimBottom" parent="@android:style/Animation">
+        <item name="android:windowEnterAnimation">@anim/push_bottom_in</item>
+        <item name="android:windowExitAnimation">@anim/push_bottom_out</item>
+    </style>
+    <!-- 自定义图片选择方式的样式 -->
+    <style name="MyDialogStyleBottom" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:windowAnimationStyle">@style/AnimBottom</item>
+        <item name="android:windowFrame">@null</item>
+        <!-- 边框 -->
+        <item name="android:windowIsFloating">false</item>
+        <!-- 是否浮现在activity之上 -->
+        <item name="android:windowIsTranslucent">false</item>
+        <!-- 半透明 -->
+        <item name="android:windowNoTitle">true</item>
+        <!-- 无标题 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!-- 背景透明 -->
+        <item name="android:backgroundDimEnabled">true</item>
+        <!-- 模糊 -->
     </style>
 
     <!-- 轮播器点的背景 -->
@@ -157,5 +214,15 @@
         <item name="android:layout_height">5dp</item>
         <item name="android:layout_marginLeft">2dp</item>
         <item name="android:layout_marginRight">2dp</item>
+    </style>
+<!--网络进度条样式-->
+    <style name="ProgressBar_Mini" parent="Base.Widget.AppCompat.ProgressBar.Horizontal">
+        <item name="android:maxHeight">@dimen/dp2</item>
+        <item name="android:minHeight">@dimen/dp2</item>
+        <item name="android:indeterminateOnly">false</item>
+        <item name="android:indeterminateDrawable">
+            @android:drawable/progress_indeterminate_horizontal
+        </item>
+        <item name="android:progressDrawable">@drawable/progressbar_mini</item>
     </style>
 </resources>

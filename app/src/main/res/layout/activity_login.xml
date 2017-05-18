@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:focusableInTouchMode="true"
+        android:id="@+id/activity_login"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="@dimen/dp20">
+
+        <ImageView
+            android:layout_width="@dimen/dp100"
+            android:layout_height="@dimen/dp100"
+            android:layout_marginBottom="@dimen/dp20"
+            android:layout_marginTop="@dimen/dp50"
+            android:background="@mipmap/ic_launcher" />
+
+
+
+        <EditText
+            android:id="@+id/login_username"
+            style="@style/second_title_black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp15"
+            android:background="@drawable/shape_corner_5dp_bg_whtie_with_border"
+            android:digits="@string/waybill_digits"
+            android:hint="账户"
+            android:inputType="textEmailAddress"
+            android:padding="@dimen/dp13"
+            android:text="13162962167"/>
+
+        <EditText
+            android:id="@+id/login_password"
+            style="@style/second_title_black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp25"
+            android:background="@drawable/shape_corner_5dp_bg_whtie_with_border"
+            android:hint="密码"
+            android:inputType="textPassword"
+            android:padding="@dimen/dp13"
+            android:text="18168392219"/>
+
+        <Button
+            style="@style/first_title_white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_corner_5dp_bg_orange"
+            android:onClick="login"
+            android:text="登录" />
+    </LinearLayout>
+</ScrollView>

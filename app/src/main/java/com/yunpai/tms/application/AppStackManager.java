@@ -6,8 +6,8 @@ import android.content.Context;
 
 
 import com.yunpai.tms.R;
+import com.yunpai.tms.activity.LoginActivity;
 import com.yunpai.tms.activity.MainActivity;
-import com.yunpai.tms.util.ToastUtil;
 
 import java.util.Stack;
 
@@ -110,9 +110,9 @@ public class AppStackManager {
      */
     public void LoginActivity() {
         for (int i = 0; i < activityStack.size(); i++) {
-            /*if (null != activityStack.get(i) && !activityStack.get(i).getClass().getName().equals(LoginByWxActivity_.class.getName())) {
+            if (null != activityStack.get(i) && !activityStack.get(i).getClass().getName().equals(LoginActivity.class.getName())) {
                 activityStack.get(i).finish();
-            }*/
+            }
         }
     }
 

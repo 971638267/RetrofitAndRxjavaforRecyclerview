@@ -16,7 +16,7 @@
             android:layout_centerInParent="true"/>
     </RelativeLayout>
     <com.gan.myrecycleview.MyRecycleView
-        android:id="@+id/message_page_recycleview"
+        android:id="@+id/pager_base_recycleview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >

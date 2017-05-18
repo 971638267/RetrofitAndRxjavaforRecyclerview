@@ -7,9 +7,17 @@ public class BannerData {
 
     private int Id;
     private String Title;
+    private String url;
     private String Image;
     private int PositionId;
 
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
 
     //region getter and setter
     public int getId() {

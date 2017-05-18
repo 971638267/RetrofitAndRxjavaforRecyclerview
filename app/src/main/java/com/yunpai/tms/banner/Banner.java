@@ -10,10 +10,12 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -180,6 +182,14 @@ public class Banner extends LinearLayout {
 		}
 	};
 
+	private int indicator = Gravity.BOTTOM;
+	public  void setIndicator(int indicator) {
+		this.indicator = indicator;
+		FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) mGroup.getLayoutParams();
+		//此处相当于布局文件中的Android:layout_gravity属性
+		lp.gravity = indicator| Gravity.BOTTOM;
+		mGroup.setLayoutParams(lp);
+	}
 	/**
 	 * 轮播图片状态监听器
 	 * 

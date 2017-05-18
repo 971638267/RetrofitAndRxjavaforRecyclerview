@@ -1,18 +1,15 @@
 package com.yunpai.tms.pagers;
 
-import android.app.Activity;
+import android.app.TabActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
-import android.view.KeyEvent;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
-import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -20,19 +17,14 @@ import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.yunpai.tms.R;
+import com.yunpai.tms.activity.BaseWebViewActivity;
 import com.yunpai.tms.activity.DetailActivity;
-import com.yunpai.tms.activity.MainActivity;
+import com.yunpai.tms.activity.MyTabActivity;
+import com.yunpai.tms.activity.PhotoPickActivity;
+import com.yunpai.tms.activity.TestActivity;
 import com.yunpai.tms.banner.Banner;
 import com.yunpai.tms.banner.BannerData;
-import com.yunpai.tms.net.networks.NetWorks;
-import com.yunpai.tms.net.resultbean.Subject;
-import com.yunpai.tms.net.subscribers.ProgressSubscriber;
-import com.yunpai.tms.net.subscribers.RecycleviewSubscriber;
-import com.yunpai.tms.net.subscribers.RecycleviewSubscriberOnNextListener;
-import com.yunpai.tms.net.subscribers.SubscriberOnNextListener;
 import com.yunpai.tms.util.DensityUtils;
-import com.yunpai.tms.util.KeyBoardUtils;
-import com.yunpai.tms.util.ToastUtil;
 import com.zxing.activity.CaptureZxingActivity;
 
 import java.util.ArrayList;
@@ -41,7 +33,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
  * @author 甘玉飞
@@ -93,12 +84,17 @@ public class HomePager extends ContentBasePager {
      */
     private void initGridview() {
         ArrayList<HashMap<String, Object>> gridData = new ArrayList<HashMap<String, Object>>();
-        final int[] imageint = new int[21];
-        for (int i = 0; i < 21; i++) {
+        final int[] imageint = new int[15];
+        for (int i = 0; i < 15; i++) {
             imageint[i] = R.drawable.icon_network;
         }
-        String[] griditemtext = new String[21];
-        for (int i = 0; i < 21; i++) {
+        String[] griditemtext = new String[15];
+        griditemtext[0]="二维码扫描";
+        griditemtext[1]="基本页面";
+        griditemtext[2]="Tab页面";
+        griditemtext[3]="网络请求";
+        griditemtext[4]="图片选择";
+        for (int i = 5; i < 15; i++) {
             griditemtext[i] = "功能" + (i + 1);
         }
 
@@ -118,17 +114,22 @@ public class HomePager extends ContentBasePager {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                /*switch (position) {
-                    case 0://
+                Intent it;
+                switch (position) {
+                    case 0://扫描功能
+                        mActivity.startActivityForResult(new Intent(mActivity, CaptureZxingActivity.class),200);
                         break;
                     case 1://
+                        mActivity.startActivity(new Intent(mActivity, TestActivity.class));
                         break;
                     case 2://
+                        mActivity.startActivity(new Intent(mActivity, MyTabActivity.class));
                         break;
                     case 3://
+                        mActivity.startActivity(new Intent(mActivity, DetailActivity.class));
                         break;
                     case 4://
-
+                        mActivity.startActivity(new Intent(mActivity, PhotoPickActivity.class));
                         break;
                     case 5://
                         break;
@@ -141,8 +142,8 @@ public class HomePager extends ContentBasePager {
 
                     default:
                         break;
-                }*/
-                SubscriberOnNextListener<List<Subject>> getTopMovieOnNext = new SubscriberOnNextListener<List<Subject>>() {
+                }
+               /* SubscriberOnNextListener<List<Subject>> getTopMovieOnNext = new SubscriberOnNextListener<List<Subject>>() {
                     @Override
                     public void onNext(List<Subject> subjects) {
                         ToastUtil.ToastCenter("请求数据成功！");
@@ -152,7 +153,7 @@ public class HomePager extends ContentBasePager {
                     }
                 };
                 ProgressSubscriber<List<Subject>> subscriber = new ProgressSubscriber<List<Subject>>(getTopMovieOnNext, mActivity, true, true);
-                NetWorks.getInstance().Test250(subscriber, 0, 10);
+                NetWorks.getInstance().Test250(subscriber, 0, 10);*/
             }
 
         });
@@ -171,8 +172,12 @@ public class HomePager extends ContentBasePager {
         for (int i = 0; i < urls.length; i++) {
             BannerData d = new BannerData();
             d.setImage(urls[i]);
-            //d.setTitle("测试tile" + i);
+            d.setTitle("测试title" + i);
             d.setId(i);
+            if (i%2==0)
+            d.setUrl("http://blog.csdn.net/u012402940/article/details/64439417");
+            else
+                d.setUrl("http://blog.csdn.net/u012402940/article/category/6226042");
             bannerList.add(d);
         }
 
@@ -181,7 +186,7 @@ public class HomePager extends ContentBasePager {
             @Override
             public void onImageClick(int position, View imageView) {
                 // 单击图片处理事件
-                // ToastUtil.ToastCenter("position" + position + "title:" + bannerList.get(position).getTitle());
+                mActivity.startActivity(new Intent(mActivity, BaseWebViewActivity.class).putExtra("title",bannerList.get(position).getTitle()).putExtra("url",bannerList.get(position).getUrl()));
             }
 
             @Override
@@ -189,6 +194,7 @@ public class HomePager extends ContentBasePager {
                 ImageLoader.getInstance().displayImage(imageURL, imageView);// 此处本人使用了ImageLoader对图片进行加装！
             }
         };
+        banner.setIndicator(Gravity.RIGHT);//指示器未知设置
         banner.setImageResources(bannerList, mAdCycleViewListener);
 
     }
@@ -227,7 +233,7 @@ public class HomePager extends ContentBasePager {
             // 高度计算
 
             int heigt1 = mGv.getMeasuredWidth() / mGv.getNumColumns();
-            int heigt2 = (mGv.getMeasuredHeight() - DensityUtils.dp2px(mActivity, 1) * 2) / 3;
+            int heigt2 = (mGv.getMeasuredHeight() - DensityUtils.dp2px(mActivity, 1) * (mGv.getNumColumns()-1)) / mGv.getNumColumns();
             int heigt = 0;
             if (heigt1 >= heigt2) {
                 if (heigt1 > heigt2 * 6 / 5) {
@@ -268,4 +274,7 @@ public class HomePager extends ContentBasePager {
         }
 
     }
+
+
+
 }

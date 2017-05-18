@@ -1,10 +1,10 @@
 package com.yunpai.tms.net.apiexception;
 
 /**
- * Created by liukun on 16/3/10.
+ * Created by gan on 16/3/10.
  */
 public class ApiException extends RuntimeException {
-
+    public static final int errData = 0;
     public static final int USER_NOT_EXIST = 100;
     public static final int WRONG_PASSWORD = 101;
 
@@ -27,16 +27,16 @@ public class ApiException extends RuntimeException {
         String message = "";
         switch (code) {
             case USER_NOT_EXIST:
-                message = "未知错误";
+                message = "用户名不存在";
                 break;
             case WRONG_PASSWORD:
                 message = "密码错误";
                 break;
-
-
+            case errData:
+                message = "服务端返回数据格式不正确";
+                break;
             default:
                 message = "未知错误";
-
         }
         return message;
     }

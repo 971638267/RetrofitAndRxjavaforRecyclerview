@@ -1,10 +1,17 @@
 package com.yunpai.tms.net.subscribers;
 
+import android.content.Intent;
+
 import com.gan.myrecycleview.MyRecycleView;
+import com.yunpai.tms.activity.LoginActivity;
+import com.yunpai.tms.application.AppStackManager;
+import com.yunpai.tms.application.MyApplication;
 import com.yunpai.tms.net.apiexception.ApiException;
+import com.yunpai.tms.util.PrefUtils;
 
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
+import java.net.UnknownHostException;
 
 import retrofit2.adapter.rxjava.HttpException;
 import rx.Subscriber;
@@ -37,6 +44,7 @@ public class RecycleviewSubscriber<T> extends Subscriber<T>  {
 
     /**
      * 订阅开始时调用
+     * 显示ProgressDialog
      */
     @Override
     public void onStart() {
@@ -44,7 +52,7 @@ public class RecycleviewSubscriber<T> extends Subscriber<T>  {
     }
 
     /**
-     * 完成
+     * 完成，隐藏ProgressDialog
      */
     @Override
     public void onCompleted() {
@@ -58,20 +66,50 @@ public class RecycleviewSubscriber<T> extends Subscriber<T>  {
     @Override
     public void onError(Throwable e) {
         if (e instanceof SocketTimeoutException) {
-            doErr(noNet,"网络连接超时，请检查您的网络状态");
+            doErr(noNet,"请求超时，请检查您的网络状态");
         } else if (e instanceof ConnectException) {
-            doErr(noNet,"网络中断，请检查您的网络状态");
+            doErr(noNet,"无法连接到服务器，请检查您的网络状态");
         }else if (e instanceof HttpException){             //HTTP错误
+           int code= ((HttpException) e).code();
+            doNetErr(code);
+            e.printStackTrace();
+        }else if (e instanceof UnknownHostException){  //无网络
             doErr(noNet,"网络异常，请检查您的网络状态");
             e.printStackTrace();
         } else if (e instanceof ApiException){
-            //ToastUtil.ToastCenter(e.getMessage());
-            doErr(onErr,e.getMessage());
+            if ("NOT_LOGIN".equals(e.getMessage())){
+                PrefUtils.setBoolean("isLogin",false);
+                PrefUtils.SetString("tokenId","");
+                PrefUtils.SetString("userId","");
+                Intent it= new Intent(MyApplication.getInstance(), LoginActivity.class);
+                it.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                MyApplication.getInstance().startActivity(it);
+                AppStackManager.getInstance().LoginActivity();
+            }else{
+                doErr(onErr,e.getMessage());
+            }
             e.printStackTrace();
         }else {
             doErr(onErr,"服务器忙");
             e.printStackTrace();
         }
+
+    }
+
+    /**
+     * 分析网络异常
+     * @param code
+     */
+    private void doNetErr(int code) {
+        switch (code){
+            case 404:
+                doErr(noNet,"请求接口异常");
+                break;
+            default:
+                doErr(noNet,"网络异常，请检查您的网络状态");
+                break;
+        }
+
     }
 
     /**
@@ -82,9 +120,6 @@ public class RecycleviewSubscriber<T> extends Subscriber<T>  {
             mSubscriberOnNextListener.onErr(pic,err);
         }
     }
-
-
-
 
     /**
      * 将onNext方法中的返回结果交给Activity或Fragment自己处理

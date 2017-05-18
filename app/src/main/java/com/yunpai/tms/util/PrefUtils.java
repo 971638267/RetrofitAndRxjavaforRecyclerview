@@ -3,6 +3,9 @@ package com.yunpai.tms.util;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.yunpai.tms.application.MyApplication;
+
+
 /**
  * 作者：Create on 2017/1/19 13:34  by  gan
  * 邮箱：
@@ -11,48 +14,48 @@ import android.content.SharedPreferences;
  */
 
 public class PrefUtils {
-    public static boolean getBoolean(Context context, String key, boolean defalt){
-        SharedPreferences sp=context.getSharedPreferences("config",Context.MODE_PRIVATE);
+    public static boolean getBoolean( String key, boolean defalt){
+        SharedPreferences sp= MyApplication.getInstance().getSharedPreferences("config",Context.MODE_PRIVATE);
         Boolean b=sp.getBoolean(key, defalt);
         return b;
     }
 
-    public  static void  setBoolean(Context context,String key,Boolean value) {
-        SharedPreferences sp=context.getSharedPreferences("config",Context.MODE_PRIVATE);
+    public  static void  setBoolean(String key,Boolean value) {
+        SharedPreferences sp= MyApplication.getInstance().getSharedPreferences("config",Context.MODE_PRIVATE);
         sp.edit().putBoolean(key, value).commit();
     }
 
-    public static String getString(Context context,String key,String defalt){
-        SharedPreferences sp=context.getSharedPreferences("config",Context.MODE_PRIVATE);
+    public static String getString(String key,String defalt){
+        SharedPreferences sp=MyApplication.getInstance().getSharedPreferences("config",Context.MODE_PRIVATE);
         String s=sp.getString(key, defalt);
         return s;
     }
 
-    public static void SetString(Context context,String key,String value){
-        SharedPreferences sp=context.getSharedPreferences("config",Context.MODE_PRIVATE);
+    public static void SetString(String key,String value){
+        SharedPreferences sp=MyApplication.getInstance().getSharedPreferences("config",Context.MODE_PRIVATE);
         sp.edit().putString(key, value).commit();
 
     }
 
-    public static int getInt(Context context,String key,int defalt){
-        SharedPreferences sp=context.getSharedPreferences("config",Context.MODE_PRIVATE);
+    public static int getInt(String key,int defalt){
+        SharedPreferences sp=MyApplication.getInstance().getSharedPreferences("config",Context.MODE_PRIVATE);
         int l=sp.getInt(key, defalt);
         return l;
     }
 
-    public static void SetInt(Context context,String key,int value){
-        SharedPreferences sp=context.getSharedPreferences("config",Context.MODE_PRIVATE);
+    public static void SetInt(String key,int value){
+        SharedPreferences sp=MyApplication.getInstance().getSharedPreferences("config",Context.MODE_PRIVATE);
         sp.edit().putInt(key, value).commit();
 
     }
-    public static long getLong(Context context,String key,long defalt){
-        SharedPreferences sp=context.getSharedPreferences("config",Context.MODE_PRIVATE);
+    public static long getLong(String key,long defalt){
+        SharedPreferences sp=MyApplication.getInstance().getSharedPreferences("config",Context.MODE_PRIVATE);
         long l=sp.getLong(key, defalt);
         return l;
     }
 
-    public static void SetLong(Context context,String key,long value){
-        SharedPreferences sp=context.getSharedPreferences("config",Context.MODE_PRIVATE);
+    public static void SetLong(String key,long value){
+        SharedPreferences sp=MyApplication.getInstance().getSharedPreferences("config",Context.MODE_PRIVATE);
         sp.edit().putLong(key, value).commit();
 
     }

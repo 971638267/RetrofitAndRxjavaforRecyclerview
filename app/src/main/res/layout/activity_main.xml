@@ -32,11 +32,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
         <com.yunpai.tms.view.TabIndicatorView
-            android:id="@+id/rb_waybill"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
-        <com.yunpai.tms.view.TabIndicatorView
             android:id="@+id/rb_me"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

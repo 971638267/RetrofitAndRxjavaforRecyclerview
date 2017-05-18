@@ -2,18 +2,18 @@ package com.yunpai.tms.net.utils;
 
 
 
+
 import com.yunpai.tms.constant.UrlConstant;
 import com.yunpai.tms.net.service.NetService;
 
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
+import okhttp3.RequestBody;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
 import rx.Observable;
 import rx.Observer;
-import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 /**
@@ -43,7 +43,7 @@ public abstract class RetrofitUtils {
                     //设置服务器路径
                     .baseUrl(UrlConstant.BASEURL)
                     //添加转化库，默认是Gson
-                    .addConverterFactory(GsonConverterFactory.create())
+                    .addConverterFactory(CustomGsonConverterFactory.create())
                     //添加回调库，采用RxJava
                     .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                     //设置使用okhttp网络请求
@@ -56,6 +56,7 @@ public abstract class RetrofitUtils {
 
 
     /**
+     * 线程调度
      * 插入观察者-泛型
      * @param observable
      * @param observer
@@ -66,5 +67,16 @@ public abstract class RetrofitUtils {
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);
+    }
+
+    /**
+     * 参数转为RequestBody
+     * @param value
+     * @return
+     */
+
+    public static RequestBody toRequestBody(String value) {
+        RequestBody body=RequestBody.create(MediaType.parse("text/plain") ,value);
+        return body;
     }
 }

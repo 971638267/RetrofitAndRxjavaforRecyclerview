@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.yunpai.tms.constant.Constant;
 
+
 /**
  * 用途: 日志管理类
  * 创建者:ganyufei
@@ -18,7 +19,7 @@ public class LogUtils {
     }
     public static void D(String msg){
         if (Constant.DEBUG){
-            Log.d("gan",msg);
+            Log.d("gan-yunpai-tms====>",msg);
         }
     }
 }

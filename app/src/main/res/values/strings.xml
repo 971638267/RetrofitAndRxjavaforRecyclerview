@@ -1,9 +1,9 @@
 <resources>
-    <string name="app_name">快速开发</string>
+    <string name="app_name">模块汇总</string>
     <string name="me_pager_title">个人中心</string>
     <string name="waybill_pager_title">订单</string>
     <string name="home_pager_title">首页</string>
-    <string name="message_pager_title">消息</string>
+    <string name="message_pager_title">电影</string>
     <string name="exit_app">退出账号</string>
     <string name="scan_tips">将二维码图片对准扫描框即可自动扫描</string>
     <string name="ok_str">确定</string>
@@ -14,4 +14,8 @@
     <string name="refresh_succeed">刷新成功</string>
     <string name="refresh_fail">刷新失败</string>
     <string name="waybill_digits">._0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLIMNOPQRSTUVWXYZ</string>
+
+    <string name="from_book">从相册选择</string>
+    <string name="make_pic">拍照</string>
+    <string name="cancel">取消</string>
 </resources>

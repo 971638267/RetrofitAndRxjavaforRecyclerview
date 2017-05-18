@@ -10,10 +10,15 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -261,5 +266,71 @@ public class Utils {
         System.arraycopy(byte_1, 0, byte_3, 0, byte_1.length);
         System.arraycopy(byte_2, 0, byte_3, byte_1.length, byte_2.length);
         return byte_3;
+    }
+
+    /**
+     * map转对象
+     * @param map
+     * @param beanClass
+     * @return
+     * @throws Exception
+     */
+    public static Object mapToObject(Map<String, Object> map, Class<?> beanClass) throws Exception {
+        if (map == null)
+            return null;
+
+        Object obj = beanClass.newInstance();
+
+        Field[] fields = obj.getClass().getDeclaredFields();
+        for (Field field : fields) {
+            int mod = field.getModifiers();
+            if(Modifier.isStatic(mod) || Modifier.isFinal(mod)){
+                continue;
+            }
+
+            field.setAccessible(true);
+            field.set(obj, map.get(field.getName()));
+        }
+
+        return obj;
+    }
+
+    /**
+     * 对象转map
+     * @param obj
+     * @return
+     */
+    public static Map<String, Object> objectToMap(Object obj)  {
+        Map<String, Object> map=new HashMap<String, Object>();
+        try {
+            if(obj == null){
+                return null;
+            }
+             map = new HashMap<String, Object>();
+            for (Class<?> clazz = obj.getClass() ; clazz != Object.class ; clazz = clazz.getSuperclass()){
+                Field[] declaredFields = clazz.getDeclaredFields();
+                for (Field field : declaredFields) {
+                    field.setAccessible(true);
+                    if (field.get(obj)!=null)
+                        map.put(field.getName(), field.get(obj));
+                }
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return map;
+    }
+
+    /**
+     * 判断文件是否存在
+     */
+    public static boolean fileIsExists(String path) {
+        File f = new File(path);
+        if (!f.exists()) {
+            return false;
+        }
+        return true;
     }
 }

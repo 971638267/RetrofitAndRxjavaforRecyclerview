@@ -33,10 +33,13 @@
         <activity
             android:name="com.zxing.activity.CaptureZxingActivity"
             android:label="@string/app_name" />
-        <activity
-            android:name=".activity.DetailActivity"
-            android:label="@string/app_name" />
-        DetailActivity
+        <activity android:name=".activity.DetailActivity" />
+        <activity android:name=".activity.LoginActivity" />
+        <activity android:name=".activity.BaseWebViewActivity" />
+        <activity android:name=".activity.TestActivity" />
+        <activity android:name=".activity.MyTabActivity" />
+        <activity android:name=".activity.PhotoPickActivity" />
+        <activity android:name=".util.image.PhotoPreviewActivity" />
     </application>
 
 </manifest>
