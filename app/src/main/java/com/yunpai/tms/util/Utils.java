@@ -4,10 +4,14 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+
+import com.yunpai.tms.net.utils.LogUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -319,7 +323,7 @@ public class Utils {
         }catch (Exception e){
             e.printStackTrace();
         }
-
+        LogUtils.D(map.toString());
         return map;
     }
 
@@ -333,4 +337,44 @@ public class Utils {
         }
         return true;
     }
+
+    /**
+     * 防止重复点击（长点击）
+     *
+     * @return 是否重复点击了 true:代表重复点击
+     */
+    private static  long lastClickTime;
+    public static boolean isFastClickLongTime() {
+        long time = System.currentTimeMillis();
+        long timeD = time - lastClickTime;
+        if (0 < timeD && timeD < 4000) {
+            return true;
+        }
+        lastClickTime = time;
+        return false;
+    }
+
+
+    /**
+     * 获取版本号
+     *
+     * @param type =true 返回版本名称 type=false 返回版本code
+     * @return
+     */
+    public static String getVersion(Context context, boolean type) {
+        try {
+            PackageManager manager = context.getPackageManager();
+            PackageInfo info = manager.getPackageInfo(context.getPackageName(), 0);
+            String versionName = info.versionName;
+            int versionCode = info.versionCode;
+            if (type)
+                return versionName;
+            else
+                return versionCode + "";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "100.0.0";
+        }
+    }
+
 }

@@ -40,6 +40,16 @@
         <activity android:name=".activity.MyTabActivity" />
         <activity android:name=".activity.PhotoPickActivity" />
         <activity android:name=".util.image.PhotoPreviewActivity" />
+        <receiver android:name="com.gan.apkdownloadlibrary.DownLoadBroadcastReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="com.gan.apkdownloadlibrary.UpdataBroadcastReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

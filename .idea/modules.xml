@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/BaseByGan.iml" filepath="$PROJECT_DIR$/BaseByGan.iml" />
+      <module fileurl="file://$PROJECT_DIR$/apkdownloadlibrary/apkdownloadlibrary.iml" filepath="$PROJECT_DIR$/apkdownloadlibrary/apkdownloadlibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/myrecycleview/myrecycleview.iml" filepath="$PROJECT_DIR$/myrecycleview/myrecycleview.iml" />
     </modules>

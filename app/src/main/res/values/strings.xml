@@ -18,4 +18,12 @@
     <string name="from_book">从相册选择</string>
     <string name="make_pic">拍照</string>
     <string name="cancel">取消</string>
+
+
+    <string name="str_newest_version">已是最新版本</string>
+    <string name="str_find_new_version">版本更新(发现新版本)</string>
+    <string name="str_version">版本更新</string>
+    <string name="str_new_version_msg">发现您有新的版本未更新。</string>
+    <string name="str_update_now">立即更新</string>
+    <string name="str_tell_late">稍后再说</string>
 </resources>

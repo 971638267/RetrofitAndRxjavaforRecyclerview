@@ -1,6 +1,7 @@
 package com.yunpai.tms.activity;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
@@ -11,14 +12,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
 
+import com.gan.apkdownloadlibrary.VersionUpdateManager;
 import com.yunpai.tms.R;
 import com.yunpai.tms.adapter.ContentAdapter;
 import com.yunpai.tms.application.AppStackManager;
+import com.yunpai.tms.constant.Constant;
+import com.yunpai.tms.net.resultbean.VerSionInfo;
+import com.yunpai.tms.net.subscribers.ProgressSubscriber;
+import com.yunpai.tms.net.subscribers.SubscriberOnNextListener;
 import com.yunpai.tms.pagers.ContentBasePager;
 import com.yunpai.tms.pagers.HomePager;
 import com.yunpai.tms.pagers.MePager;
 import com.yunpai.tms.pagers.MessagePager;
 import com.yunpai.tms.util.ToastUtil;
+import com.yunpai.tms.util.Utils;
+import com.yunpai.tms.view.MyDialogSimple;
 import com.yunpai.tms.view.TabIndicatorView;
 import com.zxing.decode.DecodeThread;
 
@@ -44,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
     private MePager mePager;
     private int currentPage = 0;// 当前选择界面
     private long mExitTime = 0;
+    private MyDialogSimple mDialog;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -51,7 +60,70 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         initView();
+        createDialog();//更新的弹窗
+        getVersion4Service();
+
     }
+
+
+    String updatePath;
+    /**
+     * 获取版本信息
+     */
+    private void getVersion4Service() {
+        SubscriberOnNextListener listener=new SubscriberOnNextListener<VerSionInfo>() {
+            @Override
+            public void onNext(VerSionInfo o) {
+                //获取版本信息成功
+                //比较版本号是否过期
+
+                if (o==null)
+                    return;
+                if (Utils.getVersion(MainActivity.this, true).compareTo(o.version) < 0) {
+                    Constant.UPLOAD_VERSION = true;
+                    updatePath= o.url;
+                    mDialog.setSimpleShow();
+                } else {
+                    Constant.UPLOAD_VERSION = false;
+                }
+
+            }
+        };
+        ProgressSubscriber subscriberVersion= new ProgressSubscriber(listener,this,true,false);
+        // NetWorks.getInstance().getVersionInfo(subscriberVersion,new  BaseRequest());
+    }
+
+    /**
+     * 初始化弹窗
+     */
+    private void createDialog() {
+        mDialog=new MyDialogSimple(this);
+        mDialog.setSimpleDialog(0, getString(R.string.str_version), getString(R.string.str_new_version_msg), getString(R.string.str_update_now), getString(R.string.str_tell_late));
+        mDialog.setSimpleDialogLinstener(new MyDialogSimple.setSimpleDialog() {
+            @Override
+            public void setSimpleDialogYes(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                if (!Utils.isFastClickLongTime()) {
+                    setAPKDownLoad(updatePath);
+                }
+            }
+
+            @Override
+            public void setSimpleDialogNo(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+    }
+
+    /**
+     * 版本下载
+     */
+    void setAPKDownLoad(String url) {
+        VersionUpdateManager manager = new VersionUpdateManager(this, getString(R.string.app_name), getString(R.string.str_new_version_msg), Constant.DOWNLOAD_APK, url);
+        manager.DownloadStart();
+    }
+
+
 
     private void initView() {
 
