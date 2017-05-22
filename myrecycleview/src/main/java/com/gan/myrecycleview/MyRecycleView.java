@@ -2,6 +2,7 @@ package com.gan.myrecycleview;
 
 import android.content.Context;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.View;
@@ -44,6 +45,7 @@ public class MyRecycleView<T> extends LinearLayout {
 
     private  ProgressBar loadingIv;//正在加载图片控件
     private TextView loadingTv;//正在加载文本控件
+    private RecyclerView.ItemAnimator itemAnimator;
 
 
     public MyRecycleView(Context context) {
@@ -73,6 +75,11 @@ public class MyRecycleView<T> extends LinearLayout {
         recyclerView = new RecyclerView(context);
         recyclerView.setVerticalScrollBarEnabled(true);
         recyclerView.setHorizontalScrollBarEnabled(true);
+        if (itemAnimator!=null)
+            recyclerView.setItemAnimator(itemAnimator);
+        else {
+            recyclerView.setItemAnimator(new DefaultItemAnimator());
+        }
         recyclerView.setLayoutParams(new LayoutParams(
                 LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
         bootLl.addView(mLoadingView);
@@ -211,15 +218,19 @@ public class MyRecycleView<T> extends LinearLayout {
         }
     }
 
-    public void setHasMore(boolean enable) {
+    private void setHasMore(boolean enable) {
         this.hasMore = enable;
         if (mLoadMoreWrapper!=null)
         mLoadMoreWrapper.setFootCanLoad(hasMore);
     }
 
-    public boolean isHasMore() {
+   /* public boolean isHasMore() {
         return hasMore;
     }
+
+    public boolean isCanMore() {
+        return canMore;
+    }*/
 
     public boolean isCanMore() {
         return canMore;
@@ -360,6 +371,15 @@ public class MyRecycleView<T> extends LinearLayout {
 
     public void addItemDecoration(RecyclerView.ItemDecoration div) {
         recyclerView.addItemDecoration(div);
+    }
+
+    /**
+     * 设置item动画效果
+     * @param defaultItemAnimator
+     */
+    public void setItemAnimator(RecyclerView.ItemAnimator defaultItemAnimator) {
+        this.itemAnimator=defaultItemAnimator;
+        recyclerView.setItemAnimator(itemAnimator);
     }
 
     /**
