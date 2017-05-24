@@ -7,6 +7,7 @@ import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
@@ -24,6 +25,7 @@ import com.yunpai.tms.pagers.ContentBasePager;
 import com.yunpai.tms.pagers.HomePager;
 import com.yunpai.tms.pagers.MePager;
 import com.yunpai.tms.pagers.MessagePager;
+import com.yunpai.tms.util.PermissionUtils;
 import com.yunpai.tms.util.ToastUtil;
 import com.yunpai.tms.util.Utils;
 import com.yunpai.tms.view.MyDialogSimple;
@@ -359,5 +361,11 @@ public class MainActivity extends AppCompatActivity {
         } else {
             finish();
         }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        PermissionUtils.getInstance(this).onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 }

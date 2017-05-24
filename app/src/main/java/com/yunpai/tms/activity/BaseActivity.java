@@ -2,6 +2,7 @@ package com.yunpai.tms.activity;
 
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.yunpai.tms.R;
 import com.yunpai.tms.application.AppStackManager;
+import com.yunpai.tms.util.PermissionUtils;
 
 
 public abstract class BaseActivity extends AppCompatActivity {
@@ -92,5 +94,11 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onDestroy() {
         AppStackManager.getInstance().finishActivity(this);
         super.onDestroy();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        PermissionUtils.getInstance(this).onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 }
