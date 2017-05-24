@@ -83,7 +83,7 @@ public class CameraDialog extends Dialog implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        if (PermissionUtils.getInstance().Camer())
+        if (PermissionUtils.getInstance(context).Camer())
             return;
         if (NEED_CHOOSE < 1) {
             Toast.makeText(context, "已经达到选择的最大上限", Toast.LENGTH_SHORT).show();

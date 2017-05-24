@@ -8,8 +8,6 @@ import android.os.Build;
 import android.support.v4.content.ContextCompat;
 import android.widget.Toast;
 
-import com.yunpai.tms.application.MyApplication;
-
 import static android.support.v4.app.ActivityCompat.requestPermissions;
 
 /**
@@ -17,17 +15,20 @@ import static android.support.v4.app.ActivityCompat.requestPermissions;
  */
 
 public class PermissionUtils {
-    Context mContext;
-    static PermissionUtils INSTANCE=null;
-    private PermissionUtils() {
-        this.mContext = MyApplication.getInstance();
+
+    private Context mContext;
+
+    private PermissionUtils(Context context) {
+        this.mContext = context;
     }
-    public static PermissionUtils getInstance() {
-        if(INSTANCE==null){
-            INSTANCE=new PermissionUtils();
-        }
-        return INSTANCE;
+
+    public static PermissionUtils getInstance(Context context) {
+        return new PermissionUtils(context);
     }
+    public void rebind(Context context) {
+        mContext = context;
+    }
+
 
     /**
      * 打电话权限
