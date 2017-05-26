@@ -14,5 +14,5 @@
         android:layout_marginLeft="8dp"
         android:gravity="center"
         android:text="没有更多数据"
-        android:textSize="16sp" />
+        android:textSize="14sp" />
 </LinearLayout>

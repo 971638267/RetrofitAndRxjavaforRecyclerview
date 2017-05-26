@@ -3,6 +3,7 @@ package com.yunpai.tms.net.progress;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Handler;
 import android.os.Message;
 
@@ -47,6 +48,7 @@ public class ProgressDialogHandler extends Handler {
             if (!pd.isShowing()) {
                 pd.show();
                 pd.setContentView(R.layout.dialog_progress);
+                pd.getWindow().setBackgroundDrawable(new ColorDrawable(0));
             }
         }
     }
