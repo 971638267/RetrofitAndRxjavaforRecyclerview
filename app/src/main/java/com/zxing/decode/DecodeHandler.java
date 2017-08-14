@@ -34,7 +34,7 @@ import com.google.zxing.PlanarYUVLuminanceSource;
 import com.google.zxing.ReaderException;
 import com.google.zxing.Result;
 import com.google.zxing.common.HybridBinarizer;
-import com.yunpai.tms.R;
+import com.gan.base.R;
 import com.zxing.activity.CaptureZxingActivity;
 
 public class DecodeHandler extends Handler {

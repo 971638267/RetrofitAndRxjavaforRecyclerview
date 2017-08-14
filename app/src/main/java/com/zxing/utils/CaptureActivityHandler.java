@@ -22,7 +22,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 
-import com.yunpai.tms.R;
+import com.gan.base.R;
 import com.zxing.activity.CaptureZxingActivity;
 import com.zxing.camera.CameraManager;
 import com.zxing.decode.DecodeThread;

@@ -3,7 +3,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/theme_white_bg">
-    <com.yunpai.tms.view.MyGridView
+    <com.gan.base.view.MyGridView
         android:id="@+id/mygridview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -13,5 +13,5 @@
         android:verticalSpacing="5dp"
         android:numColumns="3">
 
-    </com.yunpai.tms.view.MyGridView>
+    </com.gan.base.view.MyGridView>
 </LinearLayout>

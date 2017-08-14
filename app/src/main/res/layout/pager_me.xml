@@ -24,14 +24,14 @@
             android:text="@string/exit_app" />
     </RelativeLayout>
 
-    <com.yunpai.tms.view.PullToRefreshLayout
+    <com.gan.base.view.PullToRefreshLayout
         android:id="@+id/refresh_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <include layout="@layout/refresh_head" />
         <!-- 支持所有实现Pullable接口的View -->
-        <com.yunpai.tms.view.PullableScrollView
+        <com.gan.base.view.PullableScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -128,7 +128,7 @@
                     </LinearLayout>
                 </LinearLayout>
 
-                <com.yunpai.tms.view.MyGridView
+                <com.gan.base.view.MyGridView
                     android:id="@+id/me_page_gd"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -136,10 +136,10 @@
                     android:horizontalSpacing="1dp"
                     android:numColumns="2">
 
-                </com.yunpai.tms.view.MyGridView>
+                </com.gan.base.view.MyGridView>
             </LinearLayout>
 
-        </com.yunpai.tms.view.PullableScrollView>
-    </com.yunpai.tms.view.PullToRefreshLayout>
+        </com.gan.base.view.PullableScrollView>
+    </com.gan.base.view.PullToRefreshLayout>
 
 </LinearLayout>

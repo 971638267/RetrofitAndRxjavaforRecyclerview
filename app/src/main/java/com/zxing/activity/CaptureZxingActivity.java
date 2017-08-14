@@ -37,16 +37,13 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.google.zxing.Result;
-import com.yunpai.tms.R;
+import com.gan.base.R;
 
-import com.yunpai.tms.application.AppStackManager;
 import com.zxing.camera.CameraManager;
 import com.zxing.decode.DecodeThread;
 import com.zxing.utils.BeepManager;
 import com.zxing.utils.CaptureActivityHandler;
 import com.zxing.utils.InactivityTimer;
-
-import butterknife.OnClick;
 
 /**
  * This activity opens the camera and does the actual scanning on a background

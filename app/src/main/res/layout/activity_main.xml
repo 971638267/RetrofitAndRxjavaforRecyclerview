@@ -6,12 +6,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    <com.yunpai.tms.view.NoScrollViewPager
+    <com.gan.base.view.NoScrollViewPager
         android:id="@+id/vp_content"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
-    </com.yunpai.tms.view.NoScrollViewPager>
+    </com.gan.base.view.NoScrollViewPager>
     <View android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/theme_border_bg"/>
@@ -21,17 +21,17 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:background="@color/theme_white_bg">
-        <com.yunpai.tms.view.TabIndicatorView
+        <com.gan.base.view.TabIndicatorView
             android:id="@+id/rb_home"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
-        <com.yunpai.tms.view.TabIndicatorView
+        <com.gan.base.view.TabIndicatorView
             android:id="@+id/rb_message"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
-        <com.yunpai.tms.view.TabIndicatorView
+        <com.gan.base.view.TabIndicatorView
             android:id="@+id/rb_me"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
