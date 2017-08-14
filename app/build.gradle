@@ -52,5 +52,5 @@ dependencies {
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.3'
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.3'
     compile files('libs/zxing.jar')
-    compile project(':apkdownloadlibrary')
+    compile project(':appdownloadlibrary')
 }

@@ -1,1 +1,1 @@
-include ':app', ':myrecycleview', ':apkdownloadlibrary'
+include ':app', ':myrecycleview', ':appdownloadlibrary'
