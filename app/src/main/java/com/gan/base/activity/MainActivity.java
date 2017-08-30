@@ -13,7 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
 
-import com.gan.apkdownloadlibrary.VersionUpdateManager;
+import com.gan.appdownload.VersionUpdateManager;
 import com.gan.base.R;
 import com.gan.base.adapter.ContentAdapter;
 import com.gan.base.application.AppStackManager;
