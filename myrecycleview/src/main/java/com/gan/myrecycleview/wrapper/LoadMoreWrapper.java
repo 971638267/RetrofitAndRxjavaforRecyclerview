@@ -11,6 +11,7 @@ import android.widget.RelativeLayout;
 import com.gan.myrecycleview.R;
 import com.gan.myrecycleview.base.ViewHolder;
 import com.gan.myrecycleview.utils.WrapperUtils;
+
 public class LoadMoreWrapper<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 {
     public static final int ITEM_TYPE_LOAD_MORE = Integer.MAX_VALUE - 2;

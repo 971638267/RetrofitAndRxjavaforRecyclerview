@@ -3,7 +3,6 @@ package com.gan.base.activity;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 
-
 import com.gan.base.R;
 import com.gan.base.adapter.ContentAdapter;
 import com.gan.base.pagers.ContentBasePager;
@@ -15,9 +14,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * Created by gan on 2017/5/9.
- *tab页面的
- */
+* Created by gan on 2017/5/9.
+*tab页面的
+*/
 
 public abstract class BaseTabActivity extends BaseActivity {
     public List<ContentBasePager> pagerlist;

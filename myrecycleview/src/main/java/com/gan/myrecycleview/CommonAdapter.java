@@ -85,7 +85,6 @@ public abstract class CommonAdapter<T> extends RecyclerView.Adapter<ViewHolder> 
         }
     }
 
-
     public interface OnItemClickListener {
         void onItemClick(View view, RecyclerView.ViewHolder holder, int position);
 

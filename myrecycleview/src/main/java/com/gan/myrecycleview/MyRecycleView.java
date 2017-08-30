@@ -110,6 +110,10 @@ public class MyRecycleView<T> extends LinearLayout {
         super(context, attrs, defStyleAttr);
     }
 
+    public boolean isRefreshOrLoadmore(){
+        return isRefresh||isLoadMore;
+    }
+
     /**
      * 错误提示界面初始化
      *
@@ -152,7 +156,7 @@ public class MyRecycleView<T> extends LinearLayout {
      * drawableId 错误提示图片
      * exceptStr 错误提示语
      */
-    public void customExceptView(int drawableId, String exceptStr) {
+    private void customExceptView(int drawableId, String exceptStr) {
         recyclerView.setVisibility(View.INVISIBLE);
         mExceptView.setVisibility(View.VISIBLE);
         mLoadingView.setVisibility(View.INVISIBLE);
