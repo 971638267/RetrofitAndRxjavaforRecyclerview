@@ -24,10 +24,7 @@
         <activity
             android:name=".activity.MainActivity"
             android:windowSoftInputMode="stateHidden|adjustPan">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
         <!-- 扫码 -->
         <activity
@@ -40,13 +37,18 @@
         <activity android:name=".activity.MyTabActivity" />
         <activity android:name=".activity.PhotoPickActivity" />
         <activity android:name=".util.image.PhotoPreviewActivity" />
-        <activity android:name=".activity.SplashActivity" />
-        <receiver android:name="com.gan.apkdownloadlibrary.DownLoadBroadcastReceiver">
+        <activity android:name=".activity.SplashActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <receiver android:name="com.gan.appdownload.DownLoadBroadcastReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
             </intent-filter>
         </receiver>
-        <receiver android:name="com.gan.apkdownloadlibrary.UpdataBroadcastReceiver">
+        <receiver android:name="com.gan.appdownload.UpdataBroadcastReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
             </intent-filter>

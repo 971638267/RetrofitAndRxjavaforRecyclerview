@@ -10,7 +10,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center"
-    android:text="提供一站式智慧物流服务"
+    android:text="提供一站式智慧服务"
     android:layout_alignParentBottom="true"
     android:layout_marginBottom="@dimen/dp40"/>
 </RelativeLayout>
