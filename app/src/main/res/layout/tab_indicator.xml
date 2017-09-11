@@ -20,7 +20,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:text="me"
         android:textColor="@drawable/btn_buttom_tab_text_selector"
         android:layout_marginBottom="3dp"
         android:layout_centerHorizontal="true"

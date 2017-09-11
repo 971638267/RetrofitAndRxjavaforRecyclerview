@@ -19,6 +19,9 @@ import com.gan.base.adapter.ContentAdapter;
 import com.gan.base.application.AppStackManager;
 import com.gan.base.constant.Constant;
 import com.gan.base.net.resultbean.VerSionInfo;
+import com.gan.base.net.rx.RxBus;
+import com.gan.base.net.rx.RxBusBaseMessage;
+import com.gan.base.net.rx.RxCodeConstants;
 import com.gan.base.net.subscribers.ProgressSubscriber;
 import com.gan.base.net.subscribers.SubscriberOnNextListener;
 import com.gan.base.pagers.ContentBasePager;
@@ -36,6 +39,7 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import rx.functions.Action1;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -64,7 +68,18 @@ public class MainActivity extends AppCompatActivity {
         initView();
         createDialog();//更新的弹窗
         getVersion4Service();
+        initRxBus();
+    }
 
+    private void initRxBus() {
+        RxBus.getDefault().toObservable(RxCodeConstants.JUMP_TYPE, String.class)
+                .subscribe(new Action1<String>() {
+                    @Override
+                    public void call(String o) {
+                        ToastUtil.ToastCenter(o);
+                        doPageSwitch(R.id.rb_message);
+                    }
+        });
     }
 
 
@@ -133,15 +148,15 @@ public class MainActivity extends AppCompatActivity {
         rb_home.setTabTitle(getResources().getString(R.string.home_pager_title));
         rb_home.setTabIcon(R.drawable.icon_home, R.drawable.icon_home_act);
         rb_home.setTabSelected(true);
-        rb_home.setTabUnreadCount(0);
+        rb_home.setTabUnreadCount(100);
 
         rb_message.setTabTitle(getResources().getString(R.string.message_pager_title));
         rb_message.setTabIcon(R.drawable.icon_message, R.drawable.icon_mesaage_act);
-        rb_message.setWarn(false);
+        rb_message.setWarn(true);
 
         rb_me.setTabTitle(getResources().getString(R.string.me_pager_title));
         rb_me.setTabIcon(R.drawable.icon_me, R.drawable.icon_me_act);
-        rb_me.setTabUnreadCount(0);
+        rb_me.setTabUnreadCount(56);
 
         // 初始化3个子页面
         mPagerList = new ArrayList<ContentBasePager>();

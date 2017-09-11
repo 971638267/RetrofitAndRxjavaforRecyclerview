@@ -37,6 +37,8 @@
         <activity android:name=".activity.MyTabActivity" />
         <activity android:name=".activity.PhotoPickActivity" />
         <activity android:name=".util.image.PhotoPreviewActivity" />
+        <activity android:name=".activity.RxBusActivity" />
+
         <activity android:name=".activity.SplashActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
