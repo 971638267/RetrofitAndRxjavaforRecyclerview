@@ -13,7 +13,9 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Toast;
 
+
 import com.gan.base.R;
+import com.gan.base.constant.Constant;
 import com.gan.base.util.PermissionUtils;
 
 import java.io.File;
@@ -83,8 +85,8 @@ public class CameraDialog extends Dialog implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        if (PermissionUtils.getInstance(context).Camer())
-            return;
+
+
         if (NEED_CHOOSE < 1) {
             Toast.makeText(context, "已经达到选择的最大上限", Toast.LENGTH_SHORT).show();
             this.dismiss();
@@ -97,10 +99,18 @@ public class CameraDialog extends Dialog implements View.OnClickListener {
             intent.putExtra("addshow", addShow);
             intent.putExtra("urlList", ListSheft.SceneList2String(mListInfo));
             context.startActivityForResult(intent, 1001);*/
+            if (PermissionUtils.getInstance(context).Storage())
+                return;
             pickImage(context, 1001);
-        }  else if (v == btCarema)
+        }  else if (v == btCarema) {
+            if (PermissionUtils.getInstance(context).Camer()){
+                return;
+            }
+            if (PermissionUtils.getInstance(context).Storage()){
+                return;
+            }
             getImageFromCamera(1003);
-        else if (v==btnCancel) {
+        }else if (v==btnCancel) {
             cancel();
             dismiss();
         }
@@ -125,13 +135,15 @@ public class CameraDialog extends Dialog implements View.OnClickListener {
         if (state.equals(Environment.MEDIA_MOUNTED)) {
             Intent getImageByCamera = new Intent("android.media.action.IMAGE_CAPTURE");
             //获取保存的路径
-            String out_file_path = getSDPath();
+            String out_file_path = Constant.IMG_PATH;
             File dir = new File(out_file_path);
             //给成员变量赋值
-            capturePath = getSDPath() + "/" + System.currentTimeMillis() + ".jpg";
+            capturePath = out_file_path+System.currentTimeMillis() + ".jpg";
+
             if (!dir.exists()) {
                 dir.mkdirs();
             }
+
             getImageByCamera.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(capturePath)));
             getImageByCamera.putExtra(MediaStore.Images.Media.MIME_TYPE, "image/jpeg");
             getImageByCamera.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 1);
@@ -147,43 +159,16 @@ public class CameraDialog extends Dialog implements View.OnClickListener {
     /**
      * 获取存储路径，可以写在FileUtils中
      */
-    public String getSDPath() {
+ /*   public String getSDPath() {
         File sdDir = null;
         boolean sdCardExist = Environment.getExternalStorageState()
-                .equals(Environment.MEDIA_MOUNTED);//判断sd卡是否存在
+                .equals(android.os.Environment.MEDIA_MOUNTED);//判断sd卡是否存在
         if (sdCardExist) {
             sdDir = Environment.getExternalStorageDirectory();//获取跟目录
         }
         return sdDir.toString();
-    }
+    }*/
 
-    /**
-     * 开启摄像
-     * * @param actionCode 请求码
-     */
-    public void getVideoForCaremas(int actionCode) {
-        String state = Environment.getExternalStorageState();
-        if (state.equals(Environment.MEDIA_MOUNTED)) {
-            Intent getVideoByCamera = new Intent("android.media.action.VIDEO_CAPTURE");
-            //获取保存的路径
-            String out_file_path = getSDPath();
-            File dir = new File(out_file_path);
-            //给成员变量赋值
-            capturePath = getSDPath() + "/" + System.currentTimeMillis() + ".mp4";
-            if (!dir.exists()) {
-                dir.mkdirs();
-            }
-            if (null != onClick)
-                onClick.setOnVideoBack(capturePath);
-            getVideoByCamera.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(capturePath)));
-            getVideoByCamera.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 1);
-            getVideoByCamera.putExtra(MediaStore.EXTRA_DURATION_LIMIT, 20 * 1000);
-            context.startActivityForResult(getVideoByCamera, actionCode);
-        } else {
-            Toast.makeText(context, "请确认已经插入SD卡", Toast.LENGTH_LONG).show();
-        }
-
-    }
 
     /**
      * 设置窗口背景颜色

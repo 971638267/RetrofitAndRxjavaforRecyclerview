@@ -191,12 +191,13 @@
         <item name="android:windowEnterAnimation">@anim/push_bottom_in</item>
         <item name="android:windowExitAnimation">@anim/push_bottom_out</item>
     </style>
+
     <!-- 自定义图片选择方式的样式 -->
     <style name="MyDialogStyleBottom" parent="Theme.AppCompat.Light.Dialog">
         <item name="android:windowAnimationStyle">@style/AnimBottom</item>
         <item name="android:windowFrame">@null</item>
         <!-- 边框 -->
-        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowIsFloating">true</item>
         <!-- 是否浮现在activity之上 -->
         <item name="android:windowIsTranslucent">false</item>
         <!-- 半透明 -->
@@ -204,9 +205,10 @@
         <!-- 无标题 -->
         <item name="android:windowBackground">@android:color/transparent</item>
         <!-- 背景透明 -->
-        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:backgroundDimEnabled">false</item>
         <!-- 模糊 -->
     </style>
+
 
     <!-- 轮播器点的背景 -->
     <style name="dot_style">

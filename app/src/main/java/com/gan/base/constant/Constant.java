@@ -10,9 +10,12 @@ public class Constant {
     //调试模式
     public static boolean DEBUG = true;//调试模式开关
     // 缓存图片路径(imageLoder用)
-    public static final String BASE_PATH = "gan/";
 
-    public static final String BASE_IMAGE_CACHE = BASE_PATH + "cache/images/";
-    public static final String SD_CARD = Environment.getExternalStorageDirectory().getAbsolutePath() + BASE_PATH;
-    public static final String DOWNLOAD_APK = SD_CARD + "download/apk/";
+    // 缓存图片路径(imageLoder用)
+    public static final String BASE_PATH = "gan/";
+    public static final String BASE_IMAGE_CACHE = BASE_PATH + "cache/images/";//图片缓存路径
+    public static final String SD_CARD = Environment.getExternalStorageDirectory().getAbsolutePath() +"/"+ BASE_PATH;
+    public static final String DOWNLOAD_APK = "download/apk/";//下载路径
+    public static final String IMG_PATH = SD_CARD + "images/";
+
 }
