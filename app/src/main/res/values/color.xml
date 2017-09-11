@@ -10,6 +10,10 @@
     <color name="theme_text_black">#3a3a3a</color><!--主题字体黑色-->
     <color name="theme_text_gray">#929292</color><!--主题字体灰色-->
     <color name="theme_text_white">#f4f4f4</color><!--主题字体白色-->
+
+    <color name="colorPageBg">#f2f4f5</color>
+    <!--item的5.0一下版本选择器颜色-->
+    <color name="itemLowBackground">#d9d9d9</color>
     <!--基本颜色-->
     <color name="clear">#00000000</color>
     <color name="gray_90c2">#90c2c2c2</color>

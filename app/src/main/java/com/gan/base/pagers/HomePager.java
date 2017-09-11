@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
+import com.gan.base.activity.RecycleviewActivity;
 import com.gan.base.activity.RxBusActivity;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.gan.base.R;
@@ -95,7 +96,8 @@ public class HomePager extends ContentBasePager {
         griditemtext[3]="网络请求";
         griditemtext[4]="图片选择";
         griditemtext[5]="RxBus";
-        for (int i = 6; i < 15; i++) {
+        griditemtext[6]="封装列表页";
+        for (int i = 7; i < 15; i++) {
             griditemtext[i] = "功能" + (i + 1);
         }
 
@@ -136,6 +138,8 @@ public class HomePager extends ContentBasePager {
                         mActivity.startActivity(new Intent(mActivity,RxBusActivity.class));
                         break;
                     case 6://
+                        mActivity.startActivity(new Intent(mActivity,RecycleviewActivity.class));
+
                         break;
                     case 7://
                         break;
