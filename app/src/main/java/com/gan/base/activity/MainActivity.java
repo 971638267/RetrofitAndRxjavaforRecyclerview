@@ -39,6 +39,7 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import rx.Subscription;
 import rx.functions.Action1;
 
 public class MainActivity extends AppCompatActivity {
@@ -70,9 +71,9 @@ public class MainActivity extends AppCompatActivity {
         getVersion4Service();
         initRxBus();
     }
-
+    Subscription mSubscription;
     private void initRxBus() {
-        RxBus.getDefault().toObservable(RxCodeConstants.JUMP_TYPE, String.class)
+        mSubscription = RxBus.getDefault().toObservable(RxCodeConstants.JUMP_TYPE, String.class)
                 .subscribe(new Action1<String>() {
                     @Override
                     public void call(String o) {
@@ -256,6 +257,9 @@ public class MainActivity extends AppCompatActivity {
             b.onDestroy();
         }
         AppStackManager.getInstance().finishActivity(this);
+        if (!mSubscription.isUnsubscribed()) {
+            mSubscription.unsubscribe();
+        }
         super.onDestroy();
     }
 

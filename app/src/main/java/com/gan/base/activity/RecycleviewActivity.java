@@ -47,10 +47,10 @@ public class RecycleviewActivity extends BaseRecycleviewActivity<MovieInfo>{
 
     @Override
     protected void doItemUI(ViewHolder viewHolder, MovieInfo o, int position) {
-        ViewHelper.setScaleX(viewHolder.getConvertView(),0.8f);
-        ViewHelper.setScaleY(viewHolder.getConvertView(),0.8f);
-        ViewPropertyAnimator.animate(viewHolder.getConvertView()).scaleX(1).setDuration(350).setInterpolator(new OvershootInterpolator()).start();
-        ViewPropertyAnimator.animate(viewHolder.getConvertView()).scaleY(1).setDuration(350).setInterpolator(new OvershootInterpolator()).start();
+//        ViewHelper.setScaleX(viewHolder.getConvertView(),0.8f);
+//        ViewHelper.setScaleY(viewHolder.getConvertView(),0.8f);
+//        ViewPropertyAnimator.animate(viewHolder.getConvertView()).scaleX(1).setDuration(350).setInterpolator(new OvershootInterpolator()).start();
+//        ViewPropertyAnimator.animate(viewHolder.getConvertView()).scaleY(1).setDuration(350).setInterpolator(new OvershootInterpolator()).start();
         viewHolder.setText(R.id.tv_one_title,o.title);
         viewHolder.setText(R.id.tv_one_directors, StringFormatUtil.formatName(o.directors));
         viewHolder.setText(R.id.tv_one_casts, StringFormatUtil.formatName(o.casts));
