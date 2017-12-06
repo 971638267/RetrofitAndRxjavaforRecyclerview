@@ -6,12 +6,14 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.gan.myrecycleview.wrapper.HeaderAndFooterWrapper;
 import com.gan.myrecycleview.wrapper.LoadMoreWrapper;
 
 import java.util.List;
@@ -46,6 +48,9 @@ public class MyRecycleView<T> extends LinearLayout {
     private  ProgressBar loadingIv;//正在加载图片控件
     private TextView loadingTv;//正在加载文本控件
     private RecyclerView.ItemAnimator itemAnimator;
+    private HeaderAndFooterWrapper<T> headerWrapper;//头布局
+    private boolean addHead=false;//是否添加头布局
+    private ViewGroup headView;
 
 
     public MyRecycleView(Context context) {
@@ -199,10 +204,22 @@ public class MyRecycleView<T> extends LinearLayout {
                         }
                     }
                 });
+                if (addHead) {
+                    this.headerWrapper = new HeaderAndFooterWrapper<T>(mLoadMoreWrapper);
+                    headerWrapper.addHeaderView(headView);
+                    recyclerView.setAdapter(headerWrapper);
+                }else{
+                    recyclerView.setAdapter(mLoadMoreWrapper);
+                }
 
-                recyclerView.setAdapter(mLoadMoreWrapper);
             } else {
-                recyclerView.setAdapter(mAdapter);
+                if (addHead) {
+                    this.headerWrapper = new HeaderAndFooterWrapper<T>(mAdapter);
+                    headerWrapper.addHeaderView(headView);
+                    recyclerView.setAdapter(headerWrapper);
+                }else{
+                    recyclerView.setAdapter(mAdapter);
+                }
             }
 
             mAdapter.setOnItemClickListener(new CommonAdapter.OnItemClickListener() {
@@ -298,10 +315,11 @@ public class MyRecycleView<T> extends LinearLayout {
             mExceptView.setVisibility(View.INVISIBLE);
             mLoadingView.setVisibility(View.INVISIBLE);
         }
-        if (mLoadMoreWrapper != null)
+       /* if (mLoadMoreWrapper != null)
             mLoadMoreWrapper.notifyDataSetChanged();
         else
-            mAdapter.notifyDataSetChanged();
+            mAdapter.notifyDataSetChanged();*/
+        recyclerView.getAdapter().notifyDataSetChanged();
     }
 
     /**
@@ -384,6 +402,16 @@ public class MyRecycleView<T> extends LinearLayout {
     public void setItemAnimator(RecyclerView.ItemAnimator defaultItemAnimator) {
         this.itemAnimator=defaultItemAnimator;
         recyclerView.setItemAnimator(itemAnimator);
+    }
+
+    /**
+     * 添加头布局
+     * @param headerView
+     */
+    public void addHeaderView(ViewGroup headerView) {
+        addHead=true;
+        this.headView=headerView;
+
     }
 
     /**

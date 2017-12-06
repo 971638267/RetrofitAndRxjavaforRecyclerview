@@ -40,6 +40,7 @@
         <activity android:name=".activity.RxBusActivity" />
         <activity android:name=".activity.RecycleviewActivity" />
         <activity android:name=".activity.SlideMenuActivity" />
+        <activity android:name=".activity.RecycleviewWithHeadActivity" />
 
         <activity android:name=".activity.SplashActivity" >
             <intent-filter>
