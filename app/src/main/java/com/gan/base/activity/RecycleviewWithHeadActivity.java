@@ -23,8 +23,8 @@ public class RecycleviewWithHeadActivity extends BaseRecycleviewActivity<MovieIn
     @Override
     public boolean setRecyclerViewField() {
         setTitle("测试带有头布局的列表页");
-        headerView= (ViewGroup) View.inflate(this,R.layout.item_recyclerview_head,null);
-        recycleView.addHeaderView(headerView);
+       // headerView= (ViewGroup) View.inflate(this,.,null);
+        recycleView.addHeaderView(R.layout.item_recyclerview_head);
         recycleView.setOnItemClickListener(new MyRecycleView.ItemClickListener() {
             @Override
             public void onClick(View view, RecyclerView.ViewHolder holder, int position) {

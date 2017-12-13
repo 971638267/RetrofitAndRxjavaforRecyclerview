@@ -50,7 +50,6 @@ public class MyRecycleView<T> extends LinearLayout {
     private RecyclerView.ItemAnimator itemAnimator;
     private HeaderAndFooterWrapper<T> headerWrapper;//头布局
     private boolean addHead=false;//是否添加头布局
-    private ViewGroup headView;
     private int headViewId;
 
     public MyRecycleView(Context context) {
@@ -206,7 +205,7 @@ public class MyRecycleView<T> extends LinearLayout {
                 });
                 if (addHead) {
                     this.headerWrapper = new HeaderAndFooterWrapper<T>(mLoadMoreWrapper);
-                    headerWrapper.addHeaderView(headView);
+                    headerWrapper.addHeaderView(headViewId);
                     recyclerView.setAdapter(headerWrapper);
                 }else{
                     recyclerView.setAdapter(mLoadMoreWrapper);
@@ -215,7 +214,7 @@ public class MyRecycleView<T> extends LinearLayout {
             } else {
                 if (addHead) {
                     this.headerWrapper = new HeaderAndFooterWrapper<T>(mAdapter);
-                    headerWrapper.addHeaderView(headView);
+                    headerWrapper.addHeaderView(headViewId);
                     recyclerView.setAdapter(headerWrapper);
                 }else{
                     recyclerView.setAdapter(mAdapter);
@@ -404,14 +403,6 @@ public class MyRecycleView<T> extends LinearLayout {
         recyclerView.setItemAnimator(itemAnimator);
     }
 
-    /**
-     * 添加头布局
-     * @param headerView
-     */
-    public void addHeaderView(ViewGroup headerView) {
-        addHead=true;
-        this.headView=headerView;
-    }
     /**
      * 添加头布局
      * @param headerViewId

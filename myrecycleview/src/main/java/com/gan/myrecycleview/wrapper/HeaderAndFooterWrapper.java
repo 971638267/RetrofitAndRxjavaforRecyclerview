@@ -3,7 +3,7 @@ package com.gan.myrecycleview.wrapper;
 import android.support.v4.util.SparseArrayCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
+import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.gan.myrecycleview.base.ViewHolder;
@@ -15,8 +15,8 @@ public class HeaderAndFooterWrapper<T> extends RecyclerView.Adapter<RecyclerView
     private static final int BASE_ITEM_TYPE_HEADER = 100000;
     private static final int BASE_ITEM_TYPE_FOOTER = 200000;
 
-    private SparseArrayCompat<View> mHeaderViews = new SparseArrayCompat<>();
-    private SparseArrayCompat<View> mFootViews = new SparseArrayCompat<>();
+    private SparseArrayCompat<Integer> mHeaderViews = new SparseArrayCompat<>();
+    private SparseArrayCompat<Integer> mFootViews = new SparseArrayCompat<>();
 
     private RecyclerView.Adapter mInnerAdapter;
 
@@ -28,14 +28,18 @@ public class HeaderAndFooterWrapper<T> extends RecyclerView.Adapter<RecyclerView
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
     {
-        if (mHeaderViews.get(viewType) != null)
+        if (mHeaderViews.get(viewType)!= null)
         {
-            ViewHolder holder = ViewHolder.createViewHolder(parent.getContext(), mHeaderViews.get(viewType));
+          ViewGroup mHeaderView = (ViewGroup) LayoutInflater.from(parent.getContext()).inflate(mHeaderViews.get(viewType), parent,
+                    false);
+            ViewHolder holder = ViewHolder.createViewHolder(parent.getContext(), mHeaderView);
             return holder;
 
         } else if (mFootViews.get(viewType) != null)
         {
-            ViewHolder holder = ViewHolder.createViewHolder(parent.getContext(), mFootViews.get(viewType));
+            ViewGroup mFootView = (ViewGroup) LayoutInflater.from(parent.getContext()).inflate(mFootViews.get(viewType), parent,
+                    false);
+            ViewHolder holder = ViewHolder.createViewHolder(parent.getContext(), mFootView);
             return holder;
         }
         return mInnerAdapter.onCreateViewHolder(parent, viewType);
@@ -125,14 +129,14 @@ public class HeaderAndFooterWrapper<T> extends RecyclerView.Adapter<RecyclerView
     }
 
 
-    public void addHeaderView(View view)
+    public void addHeaderView(int viewId)
     {
-        mHeaderViews.put(mHeaderViews.size() + BASE_ITEM_TYPE_HEADER, view);
+        mHeaderViews.put(mHeaderViews.size() + BASE_ITEM_TYPE_HEADER, viewId);
     }
 
-    public void addFootView(View view)
+    public void addFootView(int  viewId)
     {
-        mFootViews.put(mFootViews.size() + BASE_ITEM_TYPE_FOOTER, view);
+        mFootViews.put(mFootViews.size() + BASE_ITEM_TYPE_FOOTER, viewId);
     }
 
     public int getHeadersCount()
