@@ -18,9 +18,10 @@ public class LoadMoreWrapper<T> extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     private RecyclerView.Adapter mInnerAdapter;
     private View mLoadMoreView;
-    private int mLoadMoreLayoutId;
+   // private int mLoadMoreLayoutId;
     private RelativeLayout mFooterView;
     private View mNodataView;
+    private boolean hasLoadMore=true;
 
     public LoadMoreWrapper(RecyclerView.Adapter adapter)
     {
@@ -29,7 +30,7 @@ public class LoadMoreWrapper<T> extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     private boolean hasLoadMore()
     {
-        return mLoadMoreView != null || mLoadMoreLayoutId != 0;
+        return hasLoadMore;
     }
 
 
@@ -185,9 +186,9 @@ public class LoadMoreWrapper<T> extends RecyclerView.Adapter<RecyclerView.ViewHo
         return this;
     }
 
-    public LoadMoreWrapper setLoadMoreView(int layoutId)
+    public LoadMoreWrapper setLoadMoreView(boolean hasLoadMore)
     {
-        mLoadMoreLayoutId = layoutId;
+        this.hasLoadMore = hasLoadMore;
         return this;
     }
 }

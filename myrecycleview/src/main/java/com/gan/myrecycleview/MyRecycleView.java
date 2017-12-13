@@ -51,7 +51,7 @@ public class MyRecycleView<T> extends LinearLayout {
     private HeaderAndFooterWrapper<T> headerWrapper;//头布局
     private boolean addHead=false;//是否添加头布局
     private ViewGroup headView;
-
+    private int headViewId;
 
     public MyRecycleView(Context context) {
         super(context);
@@ -191,7 +191,7 @@ public class MyRecycleView<T> extends LinearLayout {
             this.mAdapter = adapter;
             if (canMore) {//是否可以加载更多
                 mLoadMoreWrapper = new LoadMoreWrapper(mAdapter);
-                mLoadMoreWrapper.setLoadMoreView(R.layout.mycycle_foot_default_loading);
+               // mLoadMoreWrapper.setLoadMoreView(false);//是否有加载更多默认有
                 mLoadMoreWrapper.setOnLoadMoreListener(new LoadMoreWrapper.OnLoadMoreListener() {
                     @Override
                     public void onLoadMoreRequested() {
@@ -411,9 +411,15 @@ public class MyRecycleView<T> extends LinearLayout {
     public void addHeaderView(ViewGroup headerView) {
         addHead=true;
         this.headView=headerView;
-
     }
-
+    /**
+     * 添加头布局
+     * @param headerViewId
+     */
+    public void addHeaderView(int headerViewId) {
+        addHead=true;
+        this.headViewId=headerViewId;
+    }
     /**
      * 下拉刷新和自动加载监听
      */
