@@ -1,6 +1,7 @@
 package com.gan.base.util.image;
 
-import java.io.File;
+import android.content.Context;
+import android.graphics.Bitmap;
 
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiscCache;
 import com.nostra13.universalimageloader.cache.disc.naming.HashCodeFileNameGenerator;
@@ -14,8 +15,7 @@ import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
 import com.nostra13.universalimageloader.utils.StorageUtils;
 import com.gan.base.R;
 
-import android.content.Context;
-import android.graphics.Bitmap;
+import java.io.File;
 
 public class ImageLoaderConfig {
 
@@ -55,12 +55,47 @@ public class ImageLoaderConfig {
 	}
 
 	/**
+	 * 返回不修改图片大小的配置
+	 *
+	 * @param isShowDefault
+	 *            true：显示默认的加载图片 false：不显示默认的加载图片
+	 * @return
+	 */
+	public static DisplayImageOptions initNoScaleDisplayOptions(boolean isShowDefault) {
+		DisplayImageOptions.Builder displayImageOptionsBuilder = new DisplayImageOptions.Builder();
+		// 设置图片缩放方式
+		// EXACTLY: 图像将完全按比例缩小的目标大小
+		// EXACTLY_STRETCHED: 图片会缩放到目标大小
+		// IN_SAMPLE_INT: 图像将被二次采样的整数倍
+		// IN_SAMPLE_POWER_OF_2: 图片将降低2倍，直到下一减少步骤，使图像更小的目标大小
+		// NONE: 图片不会调整
+		displayImageOptionsBuilder.imageScaleType(ImageScaleType.NONE);
+		if (isShowDefault) {
+			// 默认显示的图片
+			displayImageOptionsBuilder.showStubImage(R.drawable.no_image);
+			// 地址为空的默认显示图片
+			displayImageOptionsBuilder
+					.showImageForEmptyUri(R.drawable.fail_image);
+			// 加载失败的显示图片
+			displayImageOptionsBuilder.showImageOnFail(R.drawable.fail_image);
+		}
+		// 开启内存缓存
+		displayImageOptionsBuilder.cacheInMemory(true);
+		// 开启SDCard缓存
+		displayImageOptionsBuilder.cacheOnDisk(true);
+		// 设置图片的编码格式为RGB_565，此格式比ARGB_8888快
+		displayImageOptionsBuilder.bitmapConfig(Bitmap.Config.RGB_565);
+		displayImageOptionsBuilder.displayer(new FadeInBitmapDisplayer(100));
+		return displayImageOptionsBuilder.build();
+	}
+
+	/**
 	 * 返回修改图片大小的加载参数配置
 	 * 
 	 * @return
 	 */
 	public static DisplayImageOptions initDisplayOptions(int targetWidth,
-			boolean isShowDefault) {
+														 boolean isShowDefault) {
 		DisplayImageOptions.Builder displayImageOptionsBuilder = new DisplayImageOptions.Builder();
 		// 设置图片缩放方式
 		// EXACTLY: 图像将完全按比例缩小的目标大小

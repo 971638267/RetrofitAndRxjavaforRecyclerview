@@ -15,6 +15,7 @@ import com.gan.base.util.dialog.CameraDialog;
 import com.gan.base.util.dialog.FileInfo;
 import com.gan.base.util.dialog.MyImgGridAdapter;
 import com.gan.base.util.image.PhotoPreviewActivity;
+import com.gan.base.util.image.PhotoPreviewMoreActivity;
 import com.gan.base.view.MyGridView;
 
 import java.util.ArrayList;
@@ -43,7 +44,7 @@ public class PhotoPickActivity extends BaseActivity implements CameraDialog.OnUr
         initGridView();
     }
 
-    final List<String> paths = new ArrayList<String>();
+    final ArrayList<String> paths = new ArrayList<String>();
     MyImgGridAdapter adapter;
     private CameraDialog cDialog ;
     private String picPath;
@@ -71,8 +72,8 @@ public class PhotoPickActivity extends BaseActivity implements CameraDialog.OnUr
                     showChooseImgDialog();//
                 } else {
                     //预览图片
-                    String path = paths.get(position);
-                    startActivity(new Intent(PhotoPickActivity.this, PhotoPreviewActivity.class).putExtra("photoPath", path));
+                    startActivity(new Intent(PhotoPickActivity.this, PhotoPreviewMoreActivity.class).putExtra("photoPaths",paths).putExtra("position",position));
+
                 }
             }
         });
