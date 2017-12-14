@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <com.yunpai.tms.util.image.PhotoView
+    <com.gan.base.util.image.PhotoView
         android:id="@+id/photo_preview_head_pv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
